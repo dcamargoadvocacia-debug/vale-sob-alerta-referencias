@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Recurse \"C:\\\\Users\\\\SAMSUNG\\\\OneDrive\\\\Gab. 21\\\\BARRAGENS\" -File)",
+      "Bash(Select-Object FullName, Name, Length)",
+      "Bash(Format-Table -AutoSize)",
+      "mcp__PDF_Tools_-_View__Fill__Merge__Split__Manage_Pages__Extract__read_pdf_content"
+    ]
+  }
+}

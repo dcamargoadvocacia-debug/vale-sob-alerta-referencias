@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suplemento de Evidências — Vale Sob Alerta</title>
+<style>
+  :root {
+    --navy: #1B2D4F;
+    --navy-light: #243d6a;
+    --orange: #D0521A;
+    --amber: #E09918;
+    --red: #8B1A1A;
+    --green: #1A5C32;
+    --bg: #F7F5F0;
+    --text: #1a1a1a;
+    --border: #d0ccc4;
+    --path-bg: #1e2a1e;
+    --path-text: #7ec87e;
+    --quote-bg: #FDF8F0;
+    --quote-border: #D0521A;
+    --warn-bg: #FFF5F0;
+    --warn-border: #8B1A1A;
+    --tag-red: #8B1A1A;
+    --tag-orange: #D0521A;
+    --tag-amber: #8a6200;
+    --tag-green: #1A5C32;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  /* ── TOP BANNER ── */
+  .top-banner {
+    background: var(--navy);
+    color: #fff;
+    padding: 6px 24px;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .top-banner span { opacity: 0.7; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #0f1e38 100%);
+    color: #fff;
+    padding: 52px 40px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 80px
+    );
+  }
+  .hero-label {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: 2rem;
+    font-weight: normal;
+    line-height: 1.25;
+    max-width: 720px;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--amber);
+  }
+  .hero-sub {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.92rem;
+    opacity: 0.8;
+    max-width: 640px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .hero-meta {
+    margin-top: 28px;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    opacity: 0.6;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  /* ── NAV ── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    background: var(--navy);
+    z-index: 100;
+    padding: 0 24px;
+    border-bottom: 3px solid var(--orange);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .sticky-nav a {
+    display: inline-block;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 13px 14px;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -3px;
+  }
+  .sticky-nav a:hover { color: #fff; border-bottom-color: var(--amber); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 28px; }
+
+  /* ── INTRO BOX ── */
+  .intro-box {
+    background: var(--warn-bg);
+    border-left: 5px solid var(--orange);
+    border-radius: 0 6px 6px 0;
+    padding: 22px 26px;
+    margin: 36px 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .intro-box strong { color: var(--navy); }
+
+  /* ── SECTION ── */
+  .section {
+    margin: 48px 0;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--navy);
+  }
+  .section-number {
+    background: var(--navy);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .section-title { font-size: 1.4rem; font-weight: normal; color: var(--navy); line-height: 1.3; }
+  .section-subtitle { font-family: 'Arial', sans-serif; font-size: 0.8rem; color: #666; margin-top: 4px; letter-spacing: 0.04em; }
+
+  /* ── EVIDENCE CARD ── */
+  .ev-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+  .ev-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--navy);
+    color: #fff;
+  }
+  .ev-tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .ev-tag.fato { background: var(--green); }
+  .ev-tag.alerta { background: var(--tag-red); }
+  .ev-tag.indicio { background: var(--tag-amber); color: #fff; }
+  .ev-tag.critico { background: var(--orange); }
+
+  .ev-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .ev-body { padding: 18px 20px; }
+
+  /* ── QUOTE ── */
+  .quote {
+    background: var(--quote-bg);
+    border-left: 4px solid var(--orange);
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    border-radius: 0 4px 4px 0;
+  }
+  .quote cite {
+    display: block;
+    font-style: normal;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.73rem;
+    color: #666;
+    margin-top: 8px;
+  }
+
+  /* ── WARNING QUOTE ── */
+  .quote.danger {
+    background: var(--warn-bg);
+    border-left-color: var(--red);
+  }
+
+  /* ── PATH BOX ── */
+  .path-box {
+    background: var(--path-bg);
+    border-radius: 4px;
+    padding: 10px 16px;
+    margin-top: 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--path-text);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .path-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  /* ── TABLE ── */
+  .ev-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.83rem;
+    margin-top: 12px;
+  }
+  .ev-table th {
+    background: var(--navy);
+    color: #fff;
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+  .ev-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #e8e4dc;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .ev-table tr:nth-child(even) td { background: #f9f7f3; }
+  .ev-table tr:last-child td { border-bottom: none; }
+  .ev-table td.status-nao {
+    color: var(--red);
+    font-weight: 700;
+  }
+  .ev-table td.status-sim {
+    color: var(--green);
+    font-weight: 700;
+  }
+  .ev-table td.status-parcial {
+    color: var(--orange);
+    font-weight: 700;
+  }
+  .ev-table td code {
+    background: #eee;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.82em;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    margin-top: 12px;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.88rem;
+    padding: 7px 0;
+    border-bottom: 1px solid #ece8e0;
+    line-height: 1.5;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '✗';
+    color: var(--red);
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .checklist li.present::before { content: '✓'; color: var(--green); }
+  .checklist li.partial::before { content: '◑'; color: var(--orange); }
+
+  /* ── CHAIN BOX ── */
+  .chain {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 14px;
+  }
+  .chain-item {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+  .chain-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
+    flex-shrink: 0;
+  }
+  .chain-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--navy);
+    flex-shrink: 0;
+    margin-top: 14px;
+    border: 3px solid var(--navy);
+  }
+  .chain-dot.orange { background: var(--orange); border-color: var(--orange); }
+  .chain-dot.red { background: var(--red); border-color: var(--red); }
+  .chain-line {
+    width: 2px;
+    flex: 1;
+    background: var(--border);
+    margin: 0 auto;
+  }
+  .chain-item:last-child .chain-line { display: none; }
+  .chain-content {
+    flex: 1;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 12px 16px;
+    margin: 6px 0 6px 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+  .chain-content strong { color: var(--navy); font-size: 0.88rem; }
+  .chain-content .role {
+    font-size: 0.72rem;
+    color: #888;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .chain-content .name-line { color: var(--navy); font-weight: 700; font-size: 0.9rem; }
+  .chain-content .doc-ref {
+    font-size: 0.72rem;
+    color: var(--orange);
+    margin-top: 5px;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+  .highlight-box .big-number {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--amber);
+    display: block;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .highlight-box .label { font-size: 0.78rem; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .highlight-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 16px 0;
+  }
+
+  /* ── MATRIX ── */
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8rem;
+    margin-top: 14px;
+  }
+  .matrix-table th {
+    background: var(--navy);
+    color: #fff;
+    padding: 9px 12px;
+    font-size: 0.73rem;
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+  .matrix-table th:first-child { text-align: left; }
+  .matrix-table td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+    line-height: 1.45;
+  }
+  .matrix-table tr:nth-child(even) td { background: #f8f6f0; }
+  .matrix-table .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .badge.pendente { background: #ffeaea; color: var(--red); border: 1px solid #ffb3b3; }
+  .badge.cumprido { background: #eafaf0; color: var(--green); border: 1px solid #90e0a0; }
+  .badge.parcial { background: #fff3e0; color: #8a5800; border: 1px solid #ffcc80; }
+  .badge.nao-verificado { background: #f0f0f0; color: #555; border: 1px solid #ccc; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 32px 24px;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    line-height: 1.8;
+    margin-top: 60px;
+  }
+  footer strong { color: rgba(255,255,255,0.9); }
+
+  /* ── PRINT ── */
+  @media print {
+    .sticky-nav { display: none; }
+    .top-banner { display: none; }
+    .ev-card { break-inside: avoid; }
+    .section { break-before: page; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-banner">
+  <span>Documento de Trabalho — Uso Parlamentar Interno</span>
+  <span>Elaboração: Maio 2026 · Gabinete Deputado Estadual</span>
+</div>
+
+<nav class="sticky-nav">
+  <a href="#intro">Introdução</a>
+  <a href="#laudo2021">1 · Laudo Hydros 2021</a>
+  <a href="#snisb">2 · SNISB / ANA</a>
+  <a href="#tce2023">3 · TCE Monitoramento 2023</a>
+  <a href="#tce2014">4 · TCE Auditoria 2014</a>
+  <a href="#cadeia">5 · Cadeia de Responsabilidade</a>
+  <a href="#pae">6 · PAE e ZAS</a>
+  <a href="#convenios">7 · Convênios Federais</a>
+  <a href="#matriz">8 · Matriz de Cumprimento</a>
+</nav>
+
+<div class="hero">
+  <div class="container">
+    <div class="hero-label">Suplemento de Evidências</div>
+    <h1>Lacunas Documentais e<br>Evidências Adicionais —<br><em>Barragens do Vale do Itajaí</em></h1>
+    <p class="hero-sub">
+      Este documento complementa o dossiê "Vale Sob Alerta" com achados específicos
+      dos documentos técnicos, relatórios de controle externo e cadastros nacionais disponíveis
+      na pasta de trabalho. Cada afirmação indica a fonte exata e o caminho de arquivo onde
+      a informação pode ser verificada de forma independente.
+    </p>
+    <div class="hero-meta">
+      <span>Base documental: pasta BARRAGENS/</span>
+      <span>Documentos analisados: 8 fontes primárias</span>
+      <span>Competência: dados até maio 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="container" id="intro">
+  <div class="intro-box">
+    <strong>Como usar este documento:</strong> cada seção corresponde a um conjunto de lacunas identificadas no dossiê principal.
+    Para cada achado, há (1) o dado exato, (2) a citação direta quando disponível, e (3) o caminho de arquivo
+    na pasta <code>BARRAGENS/</code> onde a informação pode ser encontrada. Os caminhos estão no formato de pasta local;
+    basta navegar pela estrutura de diretórios para localizar cada documento.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SEÇÃO 1: LAUDO HYDROS 2021
+══════════════════════════════════════════════ -->
+<div class="container">
+<div class="section" id="laudo2021">
+  <div class="section-header">
+    <div class="section-number">1</div>
+    <div>
+      <div class="section-title">Laudo Técnico Hydros — Agosto 2021</div>
+      <div class="section-subtitle">Inspeção de Segurança Regular · Barragem Norte · José Boiteux/SC · Doc. DC923.RE.BN013 Rev. B</div>
+    </div>
+  </div>
+
+  <!-- Base contratual -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag fato">Fato Comprovado</span>
+      <span class="ev-title">Base contratual e responsáveis técnicos nomeados</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        O laudo foi encomendado pelo Estado de Santa Catarina com base em contrato específico. Os responsáveis
+        constam com nome, cargo e ART identificados — informação pública que fundamenta a cadeia de accountability.
+      </p>
+      <table class="ev-table">
+        <tr><th>Item</th><th>Dado identificado no documento</th></tr>
+        <tr><td>Contrato</td><td><strong>Contrato nº 016/DC/2020</strong> — firmado em 3 de dezembro de 2020</td></tr>
+        <tr><td>Contratante</td><td>Defesa Civil de Santa Catarina — CNPJ 13.586.957/0001-03</td></tr>
+        <tr><td>Contratada</td><td>Hydros Engenharia Ltda.</td></tr>
+        <tr><td>Representante contratante</td><td><strong>David Christian Busarello</strong> — Chefe da Defesa Civil de SC</td></tr>
+        <tr><td>Responsável técnico (ART)</td><td><strong>Eng. Hideaki Ussami</strong> — Diretor Geral, Hydros Engenharia</td></tr>
+        <tr><td>Documento</td><td>DC923.RE.BN013 · Revisão B · Agosto/2021</td></tr>
+      </table>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/ESTUDOS/Laudos_Tecnicos/LAUDO-2021.pdf
+→ Capa do documento, folha de identificação e cabeçalho técnico</div>
+    </div>
+  </div>
+
+  <!-- Comportas abertas e nível ALERTA -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag alerta">Nível ALERTA</span>
+      <span class="ev-title">Comportas totalmente abertas — classificadas em Nível 2 = ALERTA pela escala ANA</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        O laudo enquadra formalmente a situação das comportas dentro da escala de risco da
+        <strong>Resolução ANA nº 236/2017</strong>. O enquadramento em Nível 2 = ALERTA não é uma avaliação subjetiva —
+        é uma classificação regulatória federal. O dossiê menciona o problema das comportas mas não apresenta
+        esse enquadramento formal.
+      </p>
+      <div class="quote danger">
+        "As comportas dos túneis de descarga encontram-se totalmente abertas [...] falta de condições operacionais, de ausência de possibilidade de se realizar a manutenção das comportas dos túneis de descarga e, também, de domínio patrimonial da barragem e seus órgãos operacionais justificam a classificação da barragem no <strong>nível 2</strong>."
+        <cite>— Laudo Hydros DC923.RE.BN013, Seção 4.11 · Nível de Perigo das Comportas</cite>
+      </div>
+      <div class="highlight-row">
+        <div class="highlight-box">
+          <span class="big-number">ALERTA</span>
+          <span class="label">Comportas dos túneis de descarga — Nível 2 conforme Res. ANA 236/2017</span>
+        </div>
+        <div class="highlight-box">
+          <span class="big-number">ATENÇÃO</span>
+          <span class="label">Nível de Perigo Global da Barragem Norte — efeito conjugado das anomalias</span>
+        </div>
+      </div>
+      <p style="font-family:Arial,sans-serif;font-size:0.84rem;color:#555;margin-top:12px;line-height:1.6;">
+        <strong>Distinção importante:</strong> o Nível de Perigo Global (ATENÇÃO) é diferente do Nível de Perigo das comportas (ALERTA).
+        O nível global reflete que as anomalias conjugadas "não comprometem de imediato a segurança, mas caso venha a progredir, pode comprometê-la."
+        O poder público pode usar o nível global mais baixo para minimizar o problema específico das comportas — razão pela qual ambos os níveis devem constar no dossiê separadamente.
+      </p>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/ESTUDOS/Laudos_Tecnicos/LAUDO-2021.pdf
+→ Seção 4.11 — Nível de Perigo das Anomalias das Comportas
+→ Seção 4.12 — Nível de Perigo Global da Barragem Norte
+→ Referência normativa: Resolução ANA nº 236/2017</div>
+    </div>
+  </div>
+
+  <!-- Sistema elétrico destruído -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag critico">Ponto Crítico</span>
+      <span class="ev-title">Sistema elétrico integralmente roubado e destruído — 5 componentes</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        O laudo descreve em detalhe o estado de cada componente elétrico da barragem. Sem sistema elétrico,
+        as comportas não podem ser operadas, mesmo que haja pessoal disponível. O dossiê não apresenta
+        essa descrição componente a componente.
+      </p>
+      <table class="ev-table">
+        <tr>
+          <th>Componente</th>
+          <th>Estado registrado no laudo</th>
+        </tr>
+        <tr>
+          <td>Sistema de Alimentação Elétrica Principal</td>
+          <td class="status-nao">"Inoperante devido a problemas de depredação total e roubo de todos os seus componentes, em especial os cabos elétricos"</td>
+        </tr>
+        <tr>
+          <td>Painéis Elétricos do Acionamento</td>
+          <td class="status-nao">"Desenergizados, inoperantes e totalmente destruídos"</td>
+        </tr>
+        <tr>
+          <td>Instalações Elétricas do Acionamento Óleo-Hidráulico</td>
+          <td class="status-nao">"Desenergizadas, inoperantes e totalmente destruídas"</td>
+        </tr>
+        <tr>
+          <td>Casa de Comando das Comportas</td>
+          <td class="status-nao">"Totalmente depredada — sem portas, janelas e instalação elétrica"</td>
+        </tr>
+        <tr>
+          <td>Guarita</td>
+          <td class="status-nao">"Totalmente depredada — sem portas, janelas e instalação elétrica"</td>
+        </tr>
+        <tr>
+          <td>Plataforma de Operação</td>
+          <td class="status-nao">"Sem portão, desprovida de rede elétrica, de água encanada, com sinais visíveis de depredação e atos de vandalismo"</td>
+        </tr>
+        <tr>
+          <td>Galeria das Comportas</td>
+          <td class="status-nao">"Entulhada de lixo e toda sorte de materiais estranhos"</td>
+        </tr>
+      </table>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/ESTUDOS/Laudos_Tecnicos/LAUDO-2021.pdf
+→ Seção 4.6.8 — Sistema de Alimentação Elétrica
+→ Recomendações 4.12 e 4.13 — Painéis elétricos e instalações óleo-hidráulicas
+→ Seção 3.5 — Descrição do estado da galeria das comportas</div>
+    </div>
+  </div>
+
+  <!-- Gerador desaparecido -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag alerta">Nível ALERTA</span>
+      <span class="ev-title">Grupo Gerador Diesel de Emergência — paradeiro desconhecido</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        O gerador diesel de emergência é o sistema de backup para operação das comportas em caso de falha
+        na energia principal. Ele não apenas está inoperante — seu paradeiro é formalmente descrito como
+        desconhecido. Apenas a base do equipamento permanece no local. O laudo recomenda substituição imediata.
+        Este dado está <strong>completamente ausente do dossiê</strong>.
+      </p>
+      <div class="quote danger">
+        "Grupo Gerador Diesel de Emergência cujo paradeiro é desconhecido — apenas a base do equipamento permanece no local."
+        <cite>— Laudo Hydros DC923.RE.BN013, Seção 4.6.9 · Grupo Gerador</cite>
+      </div>
+      <div class="quote">
+        Recomendação 4.14: substituição imediata do grupo gerador diesel de emergência, considerando o desaparecimento do equipamento original e a necessidade de alimentação de reserva para operação das comportas.
+        <cite>— Laudo Hydros DC923.RE.BN013, Seção 4.14 · Recomendações</cite>
+      </div>
+      <p style="font-family:Arial,sans-serif;font-size:0.84rem;color:#555;margin-top:12px;line-height:1.6;">
+        <strong>Impacto acumulado:</strong> sem energia elétrica principal (roubada), sem gerador de emergência (paradeiro desconhecido) e com comportas totalmente abertas, a barragem não possui qualquer capacidade de controle de fluxo hídrico em situação de emergência. Esse encadeamento deve ser explicitado no dossiê.
+      </p>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/ESTUDOS/Laudos_Tecnicos/LAUDO-2021.pdf
+→ Seção 4.6.9 — Grupo Gerador Diesel de Emergência
+→ Seção 4.14 — Recomendação de substituição do gerador</div>
+    </div>
+  </div>
+
+  <!-- Grade nunca instalada -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag critico">Ponto Crítico</span>
+      <span class="ev-title">Grade do emboque da tulipa nunca foi instalada — sem nenhum registro da ocorrência</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        Durante a inspeção, a equipe técnica realizou busca interna pelos túneis em procura de uma grade de
+        segurança. A conclusão é de que a grade <strong>nunca foi instalada</strong> — e que não existe qualquer
+        registro documental dessa ocorrência. Uma omissão de obra em infraestrutura crítica sem registro equivale a
+        ausência de controle sobre a execução original.
+      </p>
+      <div class="quote danger">
+        "A busca da grade 'perdida' [...] indicou não existe qualquer grade no interior dos túneis [...] depreendendo-se que a grade não chegou a ser instalada na laje superior da estrutura. Observa-se não existe qualquer registro de tal ocorrência ou procedimento."
+        <cite>— Laudo Hydros DC923.RE.BN013, Seção 4.4.4 · Grades e Elementos de Proteção</cite>
+      </div>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/ESTUDOS/Laudos_Tecnicos/LAUDO-2021.pdf
+→ Seção 4.4.4 — Emboque tulipa / grades de proteção dos túneis</div>
+    </div>
+  </div>
+
+  <!-- Instrumentação zero -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag alerta">Nível ALERTA</span>
+      <span class="ev-title">Instrumentação: zero equipamentos instalados na Barragem Norte</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        Instrumentação de segurança (piezômetros, medidores de recalque, réguas de nível, sensores de
+        deformação) é exigida pela <strong>Lei 12.334/2010 (Política Nacional de Segurança de Barragens)</strong>
+        como base do monitoramento contínuo. O laudo constata sua completa ausência — e a ausência de
+        qualquer registro de monitoramento das estruturas.
+      </p>
+      <div class="quote danger">
+        "A barragem Norte não possui instrumentação instalada bem como registro de monitoramento de suas estruturas."
+        <cite>— Laudo Hydros DC923.RE.BN013, Seção 4.10 · Instrumentação e Monitoramento</cite>
+      </div>
+      <p style="font-family:Arial,sans-serif;font-size:0.84rem;color:#555;margin-top:12px;line-height:1.6;">
+        Sem instrumentação, o monitoramento se reduz a inspeções visuais periódicas — que, dado o estado de
+        depredação dos acessos documentado no mesmo laudo, equivalem na prática a ausência de monitoramento efetivo.
+      </p>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/ESTUDOS/Laudos_Tecnicos/LAUDO-2021.pdf
+→ Seção 4.10 — Instrumentação e Monitoramento
+→ Referência legal: Lei Federal 12.334/2010, Art. 5º e Art. 8º</div>
+    </div>
+  </div>
+
+  <!-- 16 recomendações -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag indicio">Indício Documentado</span>
+      <span class="ev-title">16 recomendações do laudo — status de cumprimento não verificado no dossiê</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        O laudo Hydros 2021 emite 16 recomendações formais numeradas (itens 4.1 a 4.16). Nenhuma delas é
+        listada no dossiê. A pergunta evidente — que o dossiê deveria formular — é: quais dessas recomendações
+        foram cumpridas nos quatro anos desde o laudo?
+      </p>
+      <table class="ev-table">
+        <tr><th>Rec.</th><th>Objeto da recomendação</th></tr>
+        <tr><td>4.1</td><td>Novo sistema hidráulico para acionamento das comportas</td></tr>
+        <tr><td>4.2</td><td>Nova ponte rolante para operação das comportas</td></tr>
+        <tr><td>4.12</td><td>Novos painéis elétricos do acionamento</td></tr>
+        <tr><td>4.13</td><td>Novas instalações elétricas do acionamento óleo-hidráulico</td></tr>
+        <tr><td>4.14</td><td>Substituição do grupo gerador diesel (paradeiro desconhecido)</td></tr>
+        <tr><td>4.15</td><td>Restauração da subestação de energia elétrica</td></tr>
+        <tr><td>4.16</td><td>Instalação de instrumentação de monitoramento (ainda ausente)</td></tr>
+        <tr><td>Outras</td><td>Elaboração de PSB e PAE; regularização fundiária; Manual OMI</td></tr>
+      </table>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/ESTUDOS/Laudos_Tecnicos/LAUDO-2021.pdf
+→ Seções 4.1 a 4.16 — Recomendações técnicas (parte final do documento)</div>
+    </div>
+  </div>
+
+</div><!-- /section laudo2021 -->
+
+<!-- ══════════════════════════════════════════════
+     SEÇÃO 2: SNISB / ANA
+══════════════════════════════════════════════ -->
+<div class="section" id="snisb">
+  <div class="section-header">
+    <div class="section-number">2</div>
+    <div>
+      <div class="section-title">SNISB — Sistema Nacional de Informações sobre Segurança de Barragens</div>
+      <div class="section-subtitle">Análise RSB 2024/2025 · Formulário RSB 2026 · Elaboração: 08 de maio de 2026</div>
+    </div>
+  </div>
+
+  <!-- IDs SNISB -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag fato">Fato Comprovado</span>
+      <span class="ev-title">IDs cadastrais das três barragens no SNISB — resultado: "Não atende" em todas</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        As três barragens possuem identificadores únicos no cadastro nacional da ANA. O resultado formal
+        do enquadramento cadastral é <strong>"Não atende"</strong> para as três. Esses IDs permitem verificação
+        pública direta no portal ANA — transformando o dossiê em instrumento de auditoria participativa.
+      </p>
+      <table class="ev-table">
+        <tr><th>Barragem</th><th>ID SNISB/ANA</th><th>Resultado cadastral</th><th>Acesso público</th></tr>
+        <tr>
+          <td>Barragem Norte (José Boiteux/SC)</td>
+          <td><code>6771</code></td>
+          <td class="status-nao">Não atende</td>
+          <td>snisb.ana.gov.br</td>
+        </tr>
+        <tr>
+          <td>Barragem Oeste</td>
+          <td><code>6747</code></td>
+          <td class="status-nao">Não atende</td>
+          <td>snisb.ana.gov.br</td>
+        </tr>
+        <tr>
+          <td>Barragem Sul</td>
+          <td><code>6777</code></td>
+          <td class="status-nao">Não atende</td>
+          <td>snisb.ana.gov.br</td>
+        </tr>
+      </table>
+      <p style="font-family:Arial,sans-serif;font-size:0.82rem;color:#555;margin-top:12px;line-height:1.5;">
+        Os IDs permitem que qualquer cidadão, jornalista ou procurador consulte o sistema federal diretamente
+        e confirme o resultado sem intermediários. O dossiê cita o SNISB mas não apresenta os IDs.
+      </p>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/ESTUDOS/Laudos_Tecnicos/SNISB_Analise_apenas_barragens_sc.pdf
+→ Tabela de identificação cadastral das barragens (início do documento)
+→ Verificação online: https://snisb.ana.gov.br (buscar por ID ou nome)
+→ Fontes: RSB 2024/2025 — Anexos I e II; Formulário RSB 2026</div>
+    </div>
+  </div>
+
+  <!-- SEMAE sem equipe exclusiva — autodeclarado -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag critico">Ponto Crítico</span>
+      <span class="ev-title">SEMAE declarou ao sistema federal que não tem equipe exclusiva para fiscalização</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        Este não é uma crítica do dossiê ao órgão — é uma declaração do próprio órgão fiscalizador ao sistema
+        nacional da ANA. O peso jurídico é diferente: a SEMAE afirmou formalmente ao SNISB que não dispõe
+        de equipe técnica específica e exclusiva para fiscalização de segurança de barragens.
+      </p>
+      <div class="quote danger">
+        "SEMAE não possui equipe técnica específica e exclusiva para fiscalização de segurança de barragens."
+        <cite>— SNISB_Analise_apenas_barragens_sc.pdf · RSB 2024/2025 / SEMAE autodeclarado ao sistema ANA</cite>
+      </div>
+      <table class="ev-table">
+        <tr><th>Dado</th><th>Registrado no SNISB</th></tr>
+        <tr><td>Equipe dedicada exclusivamente</td><td class="status-nao">Inexistente</td></tr>
+        <tr><td>Técnicos compartilhados com outras funções</td><td><strong>8 técnicos</strong></td></tr>
+        <tr><td>Servidores temporários cedidos</td><td>De outro órgão (não identificado no RSB)</td></tr>
+      </table>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/ESTUDOS/Laudos_Tecnicos/SNISB_Analise_apenas_barragens_sc.pdf
+→ Seção sobre estrutura de fiscalização da SEMAE
+BARRAGENS/ESTUDOS/Laudos_Tecnicos/Relatorio-Anual-de-Seguranca-de-Barragens_2025.pdf
+→ Secretário: Emerson Luciano Stein
+→ Gerente de Outorga e Controle: Vinicius Tavares Constante</div>
+    </div>
+  </div>
+
+  <!-- Barragem Norte ausente das obras 2024 -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag alerta">Nível ALERTA</span>
+      <span class="ev-title">Barragem Norte ausente das obras reportadas ao fiscalizador em 2024</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        O Anexo II do RSB 2024/2025 registra obras realizadas em barragens fiscalizadas durante o período.
+        Obras em Ituporanga e Taió são mencionadas. A <strong>Barragem Norte em José Boiteux não aparece</strong>.
+        Isso significa que, segundo os próprios registros do órgão fiscalizador ao sistema federal, não houve
+        intervenção reportada na Barragem Norte em 2024 — três anos após o laudo classificar as comportas como ALERTA.
+      </p>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/ESTUDOS/Laudos_Tecnicos/SNISB_Analise_apenas_barragens_sc.pdf
+→ Análise do Anexo II — obras e intervenções reportadas ao SNISB em 2024
+→ Citar a presença de Ituporanga e Taió e a ausência de José Boiteux / Barragem Norte</div>
+    </div>
+  </div>
+
+</div><!-- /section snisb -->
+
+<!-- ══════════════════════════════════════════════
+     SEÇÃO 3: TCE MONITORAMENTO 2023
+══════════════════════════════════════════════ -->
+<div class="section" id="tce2023">
+  <div class="section-header">
+    <div class="section-number">3</div>
+    <div>
+      <div class="section-title">TCE/SC — 2º Monitoramento PMO 23/00134653</div>
+      <div class="section-subtitle">Relatório DAE-49/2023 · Vistoria in loco: 11, 22, 23 e 24 de agosto de 2023</div>
+    </div>
+  </div>
+
+  <!-- Datas da vistoria -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag fato">Fato Comprovado</span>
+      <span class="ev-title">Última vistoria pública conhecida: agosto de 2023 — nenhum registro posterior</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        A inspeção presencial do TCE/SC ocorreu em <strong>4 dias específicos: 11, 22, 23 e 24 de agosto de 2023</strong>.
+        Citar as datas é relevante para dois fins: (1) estabelece o marco temporal mais recente de fiscalização
+        pública com registro formal; (2) permite questionar o que mudou desde então — considerando que nenhum
+        documento posterior registra melhoria documentada nas estruturas.
+      </p>
+      <table class="ev-table">
+        <tr><th>Dado</th><th>Registrado no relatório</th></tr>
+        <tr><td>Processo</td><td><code>@PMO 23/00134653</code></td></tr>
+        <tr><td>Relatório</td><td><code>DAE-49/2023</code></td></tr>
+        <tr><td>Tipo</td><td>2º Monitoramento da Decisão TCE nº 1945/2015</td></tr>
+        <tr><td>Vistoria in loco</td><td><strong>11, 22, 23 e 24 de agosto de 2023</strong></td></tr>
+        <tr><td>Relator</td><td>Wilson Rogério Wan-Dall</td></tr>
+        <tr><td>Unidade Gestora</td><td>Secretaria de Estado da Proteção e Defesa Civil (SDC)</td></tr>
+      </table>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/LINHA DO TEMPO/2023_tcesc_relatorio_pmo_barragem_norte.pdf
+→ Cabeçalho e identificação do processo
+→ Cronograma de vistoria in loco (datas específicas)</div>
+    </div>
+  </div>
+
+  <!-- 15 itens em monitoramento -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag alerta">Nível ALERTA</span>
+      <span class="ev-title">15 itens da Decisão 1945/2015 ainda em monitoramento em 2023 — 8 anos depois</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        A Decisão TCE nº 1945/2015 gerou determinações e recomendações com prazo. O relatório DAE-49/2023
+        está monitorando <strong>15 itens</strong> oriundos dessa decisão. Isso significa que, 8 anos após a decisão,
+        o TCE ainda precisava verificar o cumprimento de determinações básicas.
+      </p>
+      <table class="ev-table">
+        <tr><th>Item</th><th>Objeto da determinação</th><th>Situação conhecida em 2023</th></tr>
+        <tr>
+          <td>3.1.7</td>
+          <td>Elaboração do PSB (Plano de Segurança de Barragem) das três barragens</td>
+          <td class="status-nao">Em monitoramento</td>
+        </tr>
+        <tr>
+          <td>3.1.8</td>
+          <td>RSR — Relatório de Segurança Regular periódico</td>
+          <td class="status-nao">Em monitoramento</td>
+        </tr>
+        <tr>
+          <td>3.1.9</td>
+          <td>Execução das obras de manutenção</td>
+          <td class="status-nao">Em monitoramento</td>
+        </tr>
+        <tr>
+          <td>3.4.2</td>
+          <td>Regularizar a propriedade legal das barragens (fundiário)</td>
+          <td class="status-nao">Pendente em 2023</td>
+        </tr>
+        <tr>
+          <td>3.4.3</td>
+          <td>Manual de Operação, Manutenção e Instrumentação (OMI)</td>
+          <td class="status-nao">Em monitoramento</td>
+        </tr>
+        <tr>
+          <td colspan="3" style="background:#f0f0f0;color:#555;font-style:italic;">+ 10 itens adicionais conforme relatório DAE-49/2023</td>
+        </tr>
+      </table>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/LINHA DO TEMPO/2023_tcesc_relatorio_pmo_barragem_norte.pdf
+→ Tabela de monitoramento dos itens da Decisão 1945/2015
+→ Itens 3.1.7, 3.1.8, 3.1.9, 3.4.2, 3.4.3 e demais (seção de acompanhamento)
+BARRAGENS/LINHA DO TEMPO/2022_tcesc_relatorio_resumido_auditoria.pdf
+→ Texto original da Decisão nº 1945/2015 (publicada em 2015, auditoria 2014)</div>
+    </div>
+  </div>
+
+  <!-- Responsáveis nomeados -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag fato">Fato Comprovado</span>
+      <span class="ev-title">Responsáveis formalmente identificados no monitoramento de 2023</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        O relatório de monitoramento identifica nominalmente os responsáveis pelas unidades gestoras fiscalizadas.
+        Esses nomes constam de um documento oficial do Tribunal de Contas — são informação pública.
+      </p>
+      <table class="ev-table">
+        <tr><th>Nome</th><th>Cargo / Função no processo</th></tr>
+        <tr><td><strong>Luiz Armando Schroeder Reis</strong></td><td>Responsável — SDC (Secretaria de Estado da Proteção e Defesa Civil)</td></tr>
+        <tr><td><strong>Ricardo Zanatta Guidi</strong></td><td>Responsável — SEMAE (Secretaria de Estado do Meio Ambiente e Economia Verde)</td></tr>
+        <tr><td><strong>Dirceu Leite</strong></td><td>Responsável — Epagri</td></tr>
+        <tr><td><strong>Wilson Rogério Wan-Dall</strong></td><td>Relator do processo no TCE/SC</td></tr>
+      </table>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/LINHA DO TEMPO/2023_tcesc_relatorio_pmo_barragem_norte.pdf
+→ Seção de identificação da unidade gestora e responsáveis
+→ Cabeçalho do processo @PMO 23/00134653</div>
+    </div>
+  </div>
+
+  <!-- Mudança de nomenclatura -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag indicio">Indício Documentado</span>
+      <span class="ev-title">Reforma administrativa 2023: mudança de nomes dos órgãos responsáveis</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        Em 2023, uma reforma administrativa alterou a denominação dos órgãos responsáveis pelas barragens.
+        Sem esse mapeamento, é possível argumentar que houve ruptura de responsabilidade entre os órgãos antigos
+        e novos — o que dificulta cobranças por omissões anteriores.
+      </p>
+      <table class="ev-table">
+        <tr><th>Denominação anterior</th><th>Denominação atual (pós-2023)</th><th>Base legal</th></tr>
+        <tr>
+          <td>Defesa Civil de Santa Catarina</td>
+          <td><strong>SDC — Secretaria de Estado da Proteção e Defesa Civil</strong></td>
+          <td>Lei Complementar nº 18.646/2023</td>
+        </tr>
+        <tr>
+          <td>SDE — Secretaria de Estado do Desenvolvimento Econômico Sustentável</td>
+          <td><strong>SEMAE — Secretaria de Estado do Meio Ambiente e Economia Verde</strong></td>
+          <td>Lei Complementar nº 18.646/2023</td>
+        </tr>
+      </table>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/LINHA DO TEMPO/2023_tcesc_relatorio_pmo_barragem_norte.pdf
+→ Nota sobre reforma administrativa e nova denominação dos órgãos
+→ Lei Complementar SC nº 18.646/2023 (disponível no portal ALESC)</div>
+    </div>
+  </div>
+
+</div><!-- /section tce2023 -->
+
+<!-- ══════════════════════════════════════════════
+     SEÇÃO 4: TCE AUDITORIA 2014
+══════════════════════════════════════════════ -->
+<div class="section" id="tce2014">
+  <div class="section-header">
+    <div class="section-number">4</div>
+    <div>
+      <div class="section-title">TCE/SC — Auditoria Operacional 2014 (Decisão nº 1945/2015)</div>
+      <div class="section-subtitle">Auditoria: março–agosto 2014 · Publicação TCE: 2015/2017 · Relator: Wilson Rogério Wan-Dall</div>
+    </div>
+  </div>
+
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag fato">Fato Comprovado</span>
+      <span class="ev-title">Volume auditado: R$ 663.274.374,92 liquidados entre jan/2009 e jun/2014</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        A auditoria cobriu um volume expressivo de recursos da Defesa Civil catarinense no período.
+        A conclusão — de que as barragens estavam em deficiência de manutenção apesar desse volume — é
+        central para o argumento do dossiê e está ausente.
+      </p>
+      <div class="highlight-box">
+        <span class="big-number">R$ 663,2 mi</span>
+        <span class="label">Recursos auditados — Defesa Civil SC · Período: janeiro/2009 a junho/2014</span>
+      </div>
+      <p style="font-family:Arial,sans-serif;font-size:0.84rem;color:#ccc;margin-top:12px;line-height:1.5;">
+        Achados formais do TCE sobre as barragens nesse período:
+      </p>
+      <ul class="checklist" style="margin-top:8px;">
+        <li>Inexistência de plano estadual de proteção e defesa civil</li>
+        <li>Inexistência de plano de contingência estadual</li>
+        <li>Deficiência na manutenção das barragens Norte, Sul e Oeste</li>
+        <li>Inexistência de planos para ampliar a rede de monitoramento</li>
+        <li>Baixo nível de execução orçamentária</li>
+      </ul>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/LINHA DO TEMPO/2022_tcesc_relatorio_resumido_auditoria.pdf
+→ Introdução — valor total auditado (R$ 663.274.374,92)
+→ Seção de Achados — itens 1 a 5 com base legal para cada achado
+→ Decisão TCE nº 1945/2015 — determinações e recomendações originais</div>
+    </div>
+  </div>
+
+</div><!-- /section tce2014 -->
+
+<!-- ══════════════════════════════════════════════
+     SEÇÃO 5: CADEIA DE RESPONSABILIDADE
+══════════════════════════════════════════════ -->
+<div class="section" id="cadeia">
+  <div class="section-header">
+    <div class="section-number">5</div>
+    <div>
+      <div class="section-title">Cadeia de Responsabilidade — Quem responde por quê</div>
+      <div class="section-subtitle">Accountability sem nome é cobrança sem endereço</div>
+    </div>
+  </div>
+
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag critico">Ponto Crítico</span>
+      <span class="ev-title">Estrutura completa de responsabilidade por camada — ausente no dossiê</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:16px;">
+        O dossiê apresenta os órgãos envolvidos, mas não mapeia quem especificamente responde por cada
+        omissão. A estrutura abaixo é derivada dos documentos da pasta BARRAGENS e identifica o responsável
+        de cada camada com o documento fonte.
+      </p>
+      <div class="chain">
+        <div class="chain-item">
+          <div class="chain-left">
+            <div class="chain-dot red"></div>
+            <div class="chain-line"></div>
+          </div>
+          <div class="chain-content">
+            <div class="role">Empreendedor (proprietário formal das barragens)</div>
+            <div class="name-line">Secretaria de Estado da Proteção e Defesa Civil — SDC</div>
+            <div>Antes da reforma de 2023: Defesa Civil de SC (representante: David Christian Busarello — Contrato 016/DC/2020)</div>
+            <div class="doc-ref">Fonte: LAUDO-2021.pdf (capa) · 2023_tcesc_pmo.pdf (unidade gestora)</div>
+          </div>
+        </div>
+        <div class="chain-item">
+          <div class="chain-left">
+            <div class="chain-dot orange"></div>
+            <div class="chain-line"></div>
+          </div>
+          <div class="chain-content">
+            <div class="role">Responsável técnico do laudo (ART registrada)</div>
+            <div class="name-line">Eng. Hideaki Ussami — Diretor Geral, Hydros Engenharia Ltda.</div>
+            <div>Contrato nº 016/DC/2020, firmado 3 dez 2020. Documento: DC923.RE.BN013</div>
+            <div class="doc-ref">Fonte: LAUDO-2021.pdf (folha de identificação e ART)</div>
+          </div>
+        </div>
+        <div class="chain-item">
+          <div class="chain-left">
+            <div class="chain-dot"></div>
+            <div class="chain-line"></div>
+          </div>
+          <div class="chain-content">
+            <div class="role">Órgão estadual fiscalizador (segurança de barragens)</div>
+            <div class="name-line">SEMAE — Secretaria de Estado do Meio Ambiente e Economia Verde</div>
+            <div>Gerente de Outorga e Controle: Vinicius Tavares Constante · Secretário: Emerson Luciano Stein<br>
+            Autodeclarou ao SNISB/ANA ausência de equipe técnica exclusiva</div>
+            <div class="doc-ref">Fonte: Relatorio-Anual-Seguranca-Barragens_2025.pdf · SNISB_Analise.pdf</div>
+          </div>
+        </div>
+        <div class="chain-item">
+          <div class="chain-left">
+            <div class="chain-dot"></div>
+            <div class="chain-line"></div>
+          </div>
+          <div class="chain-content">
+            <div class="role">Órgão federal de controle (cadastro e regulação)</div>
+            <div class="name-line">ANA — Agência Nacional de Águas e Saneamento Básico</div>
+            <div>Mantém SNISB. Resultado para as três barragens: "Não atende". IDs: 6771 / 6747 / 6777</div>
+            <div class="doc-ref">Fonte: SNISB_Analise_apenas_barragens_sc.pdf · snisb.ana.gov.br</div>
+          </div>
+        </div>
+        <div class="chain-item">
+          <div class="chain-left">
+            <div class="chain-dot"></div>
+            <div class="chain-line"></div>
+          </div>
+          <div class="chain-content">
+            <div class="role">Órgão estadual de controle externo</div>
+            <div class="name-line">TCE/SC — Tribunal de Contas de Santa Catarina</div>
+            <div>Responsáveis monitorados em 2023: Luiz Armando Schroeder Reis (SDC), Ricardo Zanatta Guidi (SEMAE), Dirceu Leite (Epagri)<br>
+            Relator: Wilson Rogério Wan-Dall · Processo: @PMO 23/00134653</div>
+            <div class="doc-ref">Fonte: 2023_tcesc_relatorio_pmo_barragem_norte.pdf</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /section cadeia -->
+
+<!-- ══════════════════════════════════════════════
+     SEÇÃO 6: PAE e ZAS
+══════════════════════════════════════════════ -->
+<div class="section" id="pae">
+  <div class="section-header">
+    <div class="section-number">6</div>
+    <div>
+      <div class="section-title">PAE — Plano de Ação de Emergência e ZAS — Zona de Auto Salvamento</div>
+      <div class="section-subtitle">Lacuna crítica — sem menção no dossiê</div>
+    </div>
+  </div>
+
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag alerta">Lacuna Grave</span>
+      <span class="ev-title">O dossiê não menciona o PAE — obrigação legal exigida pela Lei 12.334/2010</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:14px;">
+        O Plano de Ação de Emergência (PAE) define o que fazer quando a barragem falha: quem aciona o alarme,
+        quem é notificado, qual a Zona de Auto Salvamento (ZAS), quais são as rotas de fuga e os pontos de
+        evacuação. A Lei 12.334/2010 exige PAE para barragens com dano potencial associado alto ou médio.
+        O dossiê não menciona se o PAE existe, quem o detém, se foi simulado ou testado.
+      </p>
+      <ul class="checklist">
+        <li>Existência do PAE das três barragens verificada e referenciada no dossiê</li>
+        <li>Identificação de quem detém o PAE fisicamente (SDC? Defesa Civil Municipal?)</li>
+        <li>Registro de simulados realizados (ou ausência de simulados)</li>
+        <li>Definição da ZAS com número de pessoas em risco documentado</li>
+        <li>Identificação de população indígena dentro da ZAS (pasta INDIGENAS contém dados habitacionais)</li>
+        <li>Rotas de evacuação mapeadas para José Boiteux e municípios a jusante</li>
+      </ul>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/LEGISLACAO/Leis_Federais/
+→ Lei Federal 12.334/2010 — Art. 8º (PAE obrigatório para dano potencial alto/médio)
+BARRAGENS/INDIGENAS/Habitacao_Casa_Catarina/
+→ Dados habitacionais das comunidades Xokleng/Laklãnõ (populações em risco)
+BARRAGENS/ESTUDOS/Laudos_Tecnicos/LAUDO-2021.pdf
+→ Recomendação de elaboração do PAE (entre as 16 recomendações)
+Verificar ausência do PAE: BARRAGENS/LEGISLACAO/Manual_Operacao/</div>
+    </div>
+  </div>
+
+</div><!-- /section pae -->
+
+<!-- ══════════════════════════════════════════════
+     SEÇÃO 7: CONVÊNIOS FEDERAIS
+══════════════════════════════════════════════ -->
+<div class="section" id="convenios">
+  <div class="section-header">
+    <div class="section-number">7</div>
+    <div>
+      <div class="section-title">Convênios Federais — Execução e Prestação de Contas</div>
+      <div class="section-subtitle">Convênios 883988 e 883989 mencionados no dossiê sem status de execução</div>
+    </div>
+  </div>
+
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag indicio">Indício Documentado</span>
+      <span class="ev-title">Os convênios têm valores citados mas não têm status de execução verificado</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:14px;">
+        O dossiê cita os convênios 883988 e 883989 com valores em reais. O que não consta:
+        se foram integralmente executados fisicamente, se a prestação de contas foi aprovada,
+        e se há discrepância entre o valor conveniado e as obras efetivamente realizadas —
+        dado que o laudo de 2021 descreve a barragem em estado de abandono completo.
+      </p>
+      <ul class="checklist">
+        <li>Verificação da execução física dos convênios via Transferegov.br (portal público)</li>
+        <li>Status da prestação de contas (aprovada, pendente, devolvida)</li>
+        <li>Obras previstas vs. estado descrito no Laudo Hydros 2021 (possível inconsistência)</li>
+        <li>Identificação do gestor do convênio com nome e CPF/cargo</li>
+      </ul>
+      <div class="path-label">Onde verificar (fontes públicas)</div>
+      <div class="path-box">Transferegov.br — portal federal de convênios
+→ Buscar por: convênio 883988 / convênio 883989
+→ Verificar: situação, execução financeira, prestação de contas, vigência
+
+BARRAGENS/DOCUMENTOS_DE_TRABALHO/Dossies/
+→ Documentos internos que referenciam os valores dos convênios</div>
+    </div>
+  </div>
+
+</div><!-- /section convenios -->
+
+<!-- ══════════════════════════════════════════════
+     SEÇÃO 8: MATRIZ DE CUMPRIMENTO
+══════════════════════════════════════════════ -->
+<div class="section" id="matriz">
+  <div class="section-header">
+    <div class="section-number">8</div>
+    <div>
+      <div class="section-title">Matriz de Cumprimento — Decisão TCE nº 1945/2015</div>
+      <div class="section-subtitle">11 anos de determinações · Estado de cada item conhecido até agosto/2023</div>
+    </div>
+  </div>
+
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag critico">Ponto Crítico</span>
+      <span class="ev-title">Ferramenta de cobrança pública — cada item tem responsável e prazo</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:16px;">
+        Esta é a tabela mais poderosa que pode ser incorporada ao dossiê. Cada linha é uma determinação
+        do TCE com responsável identificado, prazo original e status verificado na última inspeção (ago/2023).
+        O dossiê atual não apresenta essa estrutura — o que enfraquece a cobrança pública.
+      </p>
+      <table class="matrix-table">
+        <tr>
+          <th>Item</th>
+          <th>Determinação</th>
+          <th>Responsável</th>
+          <th>Status ago/2023</th>
+          <th>Status atual (maio/2026)</th>
+        </tr>
+        <tr>
+          <td>3.1.7</td>
+          <td>Elaborar PSB das três barragens</td>
+          <td>SDC / SEMAE</td>
+          <td><span class="badge pendente">Em monitoramento</span></td>
+          <td><span class="badge nao-verificado">Não verificado</span></td>
+        </tr>
+        <tr>
+          <td>3.1.8</td>
+          <td>RSR — Relatório de Segurança Regular periódico</td>
+          <td>SEMAE</td>
+          <td><span class="badge pendente">Em monitoramento</span></td>
+          <td><span class="badge nao-verificado">Não verificado</span></td>
+        </tr>
+        <tr>
+          <td>3.1.9</td>
+          <td>Execução das obras de manutenção</td>
+          <td>SDC</td>
+          <td><span class="badge pendente">Em monitoramento</span></td>
+          <td><span class="badge nao-verificado">Não verificado</span></td>
+        </tr>
+        <tr>
+          <td>3.4.2</td>
+          <td>Regularizar a propriedade legal das barragens</td>
+          <td>SDC / Estado de SC</td>
+          <td><span class="badge pendente">Pendente</span></td>
+          <td><span class="badge nao-verificado">Não verificado</span></td>
+        </tr>
+        <tr>
+          <td>3.4.3</td>
+          <td>Manual de Operação, Manutenção e Instrumentação</td>
+          <td>SDC</td>
+          <td><span class="badge pendente">Em monitoramento</span></td>
+          <td><span class="badge nao-verificado">Não verificado</span></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="font-style:italic;color:#888;">+ 10 itens adicionais do DAE-49/2023</td>
+          <td colspan="3" style="color:#888;font-size:0.78rem;">Verificar e completar a partir do relatório original</td>
+        </tr>
+      </table>
+      <p style="font-family:Arial,sans-serif;font-size:0.82rem;color:#555;margin-top:16px;line-height:1.5;">
+        <strong>Ação recomendada:</strong> solicitar ao TCE/SC, via requerimento parlamentar ou LAI,
+        o status atual (2024/2025/2026) de cada um dos 15 itens do PMO 23/00134653 —
+        o que provavelmente gerará um 3º monitoramento se ainda houver pendências.
+      </p>
+      <div class="path-label">Onde encontrar</div>
+      <div class="path-box">BARRAGENS/LINHA DO TEMPO/2023_tcesc_relatorio_pmo_barragem_norte.pdf
+→ Tabela completa dos 15 itens com situação avaliada em agosto/2023
+BARRAGENS/LINHA DO TEMPO/2022_tcesc_relatorio_resumido_auditoria.pdf
+→ Texto original das determinações da Decisão 1945/2015</div>
+    </div>
+  </div>
+
+  <!-- Perguntas para o dossiê -->
+  <div class="ev-card">
+    <div class="ev-header">
+      <span class="ev-tag indicio">Propostas de inclusão</span>
+      <span class="ev-title">Perguntas públicas adicionais — derivadas dos documentos</span>
+    </div>
+    <div class="ev-body">
+      <p style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.6;margin-bottom:12px;">
+        As seguintes perguntas são diretamente suportadas pelos documentos e fortalecem a seção de questionamentos públicos do dossiê:
+      </p>
+      <ol style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.8;padding-left:22px;color:#1a1a1a;">
+        <li>Qual é o status atual das 16 recomendações do Laudo Hydros (DC923.RE.BN013/2021)? Quais foram implementadas?</li>
+        <li>O gerador de emergência da Barragem Norte — cujo paradeiro era desconhecido em 2021 — foi localizado, recuperado ou substituído?</li>
+        <li>A instrumentação de monitoramento da Barragem Norte foi instalada após o laudo de 2021 constatar sua ausência total?</li>
+        <li>Qual é o resultado atual dos IDs 6771 (Norte), 6747 (Oeste) e 6777 (Sul) no SNISB/ANA?</li>
+        <li>O PAE (Plano de Ação de Emergência) das três barragens existe, está atualizado e foi testado em simulado?</li>
+        <li>Quantas pessoas vivem na Zona de Auto Salvamento (ZAS) das três barragens, incluindo as comunidades indígenas Xokleng/Laklãnõ?</li>
+        <li>A propriedade legal das barragens (item 3.4.2 da Decisão TCE 1945/2015) foi regularizada — pendência identificada desde 2015?</li>
+        <li>Os convênios federais 883988 e 883989 tiveram prestação de contas aprovada? A execução física corresponde ao valor conveniado?</li>
+      </ol>
+      <div class="path-label">Base documental para cada pergunta</div>
+      <div class="path-box">1-3: BARRAGENS/ESTUDOS/Laudos_Tecnicos/LAUDO-2021.pdf (recomendações 4.1-4.16)
+4:   BARRAGENS/ESTUDOS/Laudos_Tecnicos/SNISB_Analise_apenas_barragens_sc.pdf
+5:   BARRAGENS/LEGISLACAO/Leis_Federais/ (Lei 12.334/2010 Art. 8º) + LAUDO-2021.pdf
+6:   BARRAGENS/INDIGENAS/Habitacao_Casa_Catarina/ + laudos técnicos
+7:   BARRAGENS/LINHA DO TEMPO/2023_tcesc_relatorio_pmo_barragem_norte.pdf (item 3.4.2)
+8:   BARRAGENS/DOCUMENTOS_DE_TRABALHO/Dossies/ + Transferegov.br</div>
+    </div>
+  </div>
+
+</div><!-- /section matriz -->
+
+</div><!-- /container -->
+
+<footer>
+  <div class="container">
+    <p>
+      <strong>Suplemento de Evidências — Vale Sob Alerta</strong><br>
+      Documento de trabalho interno · Gabinete Deputado Estadual · Santa Catarina<br>
+      Elaborado com base nos documentos da pasta BARRAGENS/ · Competência: maio de 2026
+    </p>
+    <p style="margin-top:14px;font-size:0.73rem;">
+      Todas as afirmações deste documento são derivadas de fontes primárias identificadas: laudos técnicos,
+      relatórios de controle externo (TCE/SC), cadastros nacionais (SNISB/ANA) e relatórios oficiais estaduais (SEMAE/RSB).
+      Nenhuma afirmação é de autoria do gabinete — o gabinete apenas sistematiza e apresenta informações públicas existentes.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

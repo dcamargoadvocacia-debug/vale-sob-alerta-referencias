@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vale Sob Alerta — Dossiê Público sobre Barragens e Segurança Hídrica no Vale do Itajaí</title>
+<style>
+  :root {
+    --navy:   #1B2D4F;
+    --navy2:  #243A63;
+    --navy3:  #354F80;
+    --orange: #D0521A;
+    --orange2:#E06628;
+    --amber:  #E09918;
+    --red:    #8B1A1A;
+    --green:  #1A5C32;
+    --cream:  #F6F4F0;
+    --white:  #FFFFFF;
+    --gray1:  #F0EDE8;
+    --gray2:  #D6D1C8;
+    --gray3:  #8E897F;
+    --text:   #1A1815;
+    --textm:  #3D3830;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy);
+    border-bottom: 3px solid var(--orange);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 1rem;
+    overflow-x: auto;
+  }
+  nav .brand { color: var(--white); font-weight: bold; font-size: 0.85rem;
+    white-space: nowrap; padding: 0.9rem 0; letter-spacing: 0.05em; flex-shrink:0; }
+  nav .brand span { color: var(--orange); }
+  nav a {
+    color: var(--gray2); text-decoration: none; font-size: 0.75rem;
+    white-space: nowrap; padding: 0.9rem 0.5rem; border-bottom: 2px solid transparent;
+    font-family: sans-serif; letter-spacing: 0.03em; transition: color 0.2s, border-color 0.2s;
+  }
+  nav a:hover { color: var(--white); border-bottom-color: var(--orange); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 55%, #1E3A5F 100%);
+    color: var(--white); padding: 5rem 2rem 4rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 60px,
+      rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px);
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block; background: var(--orange); color: var(--white);
+    font-family: sans-serif; font-size: 0.7rem; font-weight: bold;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 2px; margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: bold;
+    line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 0.5rem;
+  }
+  .hero h1 span { color: var(--orange); }
+  .hero h2 {
+    font-size: clamp(0.95rem, 2vw, 1.2rem); font-weight: normal;
+    color: #A8BAD0; margin-bottom: 2rem; font-style: italic;
+  }
+  .hero-quote {
+    font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--white);
+    border-left: 4px solid var(--orange); padding: 1rem 1.5rem;
+    margin: 2rem auto; text-align: left; max-width: 680px;
+    background: rgba(255,255,255,0.05); font-style: italic;
+  }
+  .hero-meta { font-size: 0.85rem; color: #8AADCA; margin-top: 1.5rem; }
+  .hero-meta strong { color: var(--white); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: 3.5rem 0 2rem; }
+  section:nth-child(even) { background: var(--white); }
+
+  /* ── SECTION HEADERS ── */
+  .sec-label {
+    display: inline-block; background: var(--orange); color: var(--white);
+    font-family: sans-serif; font-size: 0.65rem; font-weight: bold;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.25rem 0.75rem; border-radius: 2px; margin-bottom: 0.5rem;
+  }
+  h2.sec-title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--navy);
+    border-bottom: 3px solid var(--orange); padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem; line-height: 1.2;
+  }
+  h3.sub-title {
+    font-size: 1.15rem; color: var(--navy2); margin: 1.5rem 0 0.75rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  h3.sub-title::before {
+    content: ''; width: 4px; height: 1.1em; background: var(--orange);
+    display: inline-block; border-radius: 2px; flex-shrink:0;
+  }
+
+  /* ── EVIDENCE BADGES ── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-family: sans-serif; font-size: 0.7rem; font-weight: bold;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.25rem 0.65rem; border-radius: 2px; border-width: 1px; border-style: solid;
+  }
+  .badge-fact  { background: #E8F5EE; color: var(--green); border-color: var(--green); }
+  .badge-indic { background: #FEF9E7; color: #7A6000; border-color: var(--amber); }
+  .badge-alert { background: #FEF0E8; color: var(--orange); border-color: var(--orange); }
+  .badge-crit  { background: #F5E6E6; color: var(--red);  border-color: var(--red); }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 0.75rem;
+    background: var(--gray1); border: 1px solid var(--gray2);
+    border-radius: 4px; padding: 1rem 1.25rem; margin-bottom: 2rem;
+  }
+  .legend-item { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white); border-radius: 4px;
+    border: 1px solid var(--gray2); padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem; border-left: 4px solid var(--navy3);
+  }
+  .card.orange { border-left-color: var(--orange); }
+  .card.red    { border-left-color: var(--red); }
+  .card.green  { border-left-color: var(--green); }
+  .card.amber  { border-left-color: var(--amber); }
+  .card h4 { color: var(--navy); font-size: 1rem; margin-bottom: 0.5rem; }
+  .card p  { font-size: 0.92rem; color: var(--textm); }
+  .card .pq { /* pergunta pública */
+    margin-top: 0.75rem; padding: 0.5rem 0.75rem;
+    background: #EEF2F8; border-left: 3px solid var(--navy3);
+    font-size: 0.88rem; font-style: italic; color: var(--navy);
+  }
+
+  /* ── GRID 2 ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:640px){ .grid2 { grid-template-columns: 1fr; } }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 2.5rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0.65rem; top: 0; bottom: 0;
+    width: 3px; background: linear-gradient(to bottom, var(--orange), var(--navy));
+    border-radius: 2px;
+  }
+  .tl-item { position: relative; margin-bottom: 1.5rem; }
+  .tl-dot {
+    position: absolute; left: -2.15rem; top: 0.3rem;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--orange); border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--orange);
+  }
+  .tl-dot.navy  { background: var(--navy3); box-shadow: 0 0 0 2px var(--navy3); }
+  .tl-dot.red   { background: var(--red);   box-shadow: 0 0 0 2px var(--red); }
+  .tl-dot.green { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+  .tl-dot.amber { background: var(--amber); box-shadow: 0 0 0 2px var(--amber); }
+  .tl-year {
+    font-family: sans-serif; font-size: 0.75rem; font-weight: bold;
+    color: var(--orange); letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  .tl-title { font-weight: bold; color: var(--navy); margin-bottom: 0.25rem; font-size: 0.97rem; }
+  .tl-body  { font-size: 0.88rem; color: var(--textm); }
+
+  /* ── TABLES ── */
+  .tbl-wrap { overflow-x: auto; margin: 1.25rem 0; border-radius: 4px; border: 1px solid var(--gray2); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  thead tr { background: var(--navy); color: var(--white); }
+  thead th { padding: 0.65rem 0.85rem; text-align: left; font-weight: bold; font-family: sans-serif;
+    letter-spacing: 0.04em; white-space: nowrap; }
+  tbody tr:nth-child(odd)  { background: var(--cream); }
+  tbody tr:nth-child(even) { background: var(--white); }
+  tbody td { padding: 0.6rem 0.85rem; vertical-align: top; color: var(--textm); border-bottom: 1px solid var(--gray2); }
+  tbody tr:last-child td { border-bottom: none; }
+  .td-critical { color: var(--red); font-weight: bold; }
+  .td-alert    { color: var(--orange); font-weight: bold; }
+  .td-ok       { color: var(--green); font-weight: bold; }
+  .td-partial  { color: #7A6000; }
+
+  /* ── QUESTIONS ── */
+  .q-list { counter-reset: qctr; list-style: none; }
+  .q-list li {
+    counter-increment: qctr; padding: 1rem 1rem 1rem 3.5rem; position: relative;
+    border-bottom: 1px solid var(--gray2); font-size: 0.92rem; color: var(--textm);
+    transition: background 0.15s;
+  }
+  .q-list li:hover { background: var(--gray1); }
+  .q-list li::before {
+    content: counter(qctr, decimal-leading-zero);
+    position: absolute; left: 0.75rem; top: 0.9rem;
+    font-family: sans-serif; font-weight: bold; font-size: 1.1rem;
+    color: var(--orange); line-height: 1;
+  }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    border-left: 4px solid var(--orange); padding: 1rem 1.5rem;
+    margin: 1.5rem 0; background: var(--gray1); border-radius: 0 4px 4px 0;
+  }
+  .pull-quote p { font-size: 1.05rem; font-style: italic; color: var(--navy); margin-bottom: 0; }
+  .pull-quote cite { font-size: 0.8rem; color: var(--gray3); font-style: normal; display: block; margin-top: 0.5rem; }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-radius: 4px; padding: 1rem 1.25rem; margin: 1rem 0;
+    display: flex; gap: 0.75rem; align-items: flex-start;
+  }
+  .callout-orange { background: #FEF0E8; border: 1px solid #F5B897; }
+  .callout-red    { background: #F5E6E6; border: 1px solid #D08080; }
+  .callout-green  { background: #E8F5EE; border: 1px solid #7DC49A; }
+  .callout-navy   { background: #EEF2F8; border: 1px solid #9AAFCC; }
+  .callout-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .callout p { font-size: 0.9rem; color: var(--textm); margin: 0; }
+  .callout strong { color: var(--navy); }
+
+  /* ── LIBRARY CARDS ── */
+  .lib-card {
+    border: 1px solid var(--gray2); border-radius: 4px;
+    padding: 1rem 1.25rem; margin-bottom: 0.75rem;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+    background: var(--white);
+  }
+  .lib-card-info h4 { font-size: 0.92rem; color: var(--navy); margin-bottom: 0.2rem; }
+  .lib-card-info p  { font-size: 0.8rem; color: var(--gray3); }
+  .lib-card-badge   { flex-shrink: 0; }
+  .lib-tag {
+    display: inline-block; font-family: sans-serif; font-size: 0.65rem; font-weight: bold;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.2rem 0.5rem; border-radius: 2px; margin-right: 0.25rem;
+  }
+  .lib-tag-jud  { background: #EEF2F8; color: var(--navy2); }
+  .lib-tag-tce  { background: #FEF0E8; color: var(--orange); }
+  .lib-tag-tec  { background: #E8F5EE; color: var(--green); }
+  .lib-tag-ind  { background: #F5E6E6; color: var(--red); }
+  .lib-tag-leg  { background: #FEF9E7; color: #7A6000; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); color: var(--white);
+    padding: 3rem 1.5rem 2rem; text-align: center;
+    border-top: 4px solid var(--orange);
+  }
+  footer h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+  footer p { font-size: 0.85rem; color: #8AADCA; margin-bottom: 0.4rem; }
+  footer .footer-quote {
+    margin: 1.5rem auto; max-width: 640px;
+    font-style: italic; font-size: 1rem; color: var(--white);
+    border-top: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding: 1rem 0;
+  }
+
+  /* ── PARTICIPATION FORM ── */
+  .form-section {
+    background: var(--navy); color: var(--white); padding: 2.5rem; border-radius: 4px;
+    margin-top: 1.5rem;
+  }
+  .form-section h3 { color: var(--orange); margin-bottom: 1rem; }
+  .form-section p { font-size: 0.9rem; color: #A8BAD0; margin-bottom: 1.5rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:600px){ .form-grid { grid-template-columns: 1fr; } }
+  .form-field label { display: block; font-size: 0.8rem; font-family: sans-serif;
+    letter-spacing: 0.06em; text-transform: uppercase; color: #A8BAD0; margin-bottom: 0.4rem; }
+  .form-field input, .form-field select, .form-field textarea {
+    width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white); padding: 0.6rem 0.85rem; border-radius: 3px; font-size: 0.9rem;
+    font-family: inherit;
+  }
+  .form-field.full { grid-column: 1 / -1; }
+  .btn-submit {
+    margin-top: 1.25rem; background: var(--orange); color: var(--white);
+    border: none; padding: 0.75rem 2rem; font-size: 0.9rem; font-family: sans-serif;
+    font-weight: bold; letter-spacing: 0.06em; text-transform: uppercase;
+    border-radius: 3px; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-submit:hover { background: var(--orange2); }
+
+  /* ── MISC ── */
+  .divider { border: none; border-top: 2px solid var(--gray2); margin: 2rem 0; }
+  .tag-row  { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat-row { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
+  .stat-box {
+    flex: 1 1 160px; background: var(--navy); color: var(--white);
+    border-radius: 4px; padding: 1rem 1.25rem; text-align: center;
+  }
+  .stat-box .num { font-size: 2rem; font-weight: bold; color: var(--orange); line-height: 1; }
+  .stat-box .lbl { font-size: 0.75rem; font-family: sans-serif; color: #8AADCA; margin-top: 0.3rem; }
+  ul.bullet { padding-left: 1.4rem; margin: 0.5rem 0; }
+  ul.bullet li { font-size: 0.9rem; color: var(--textm); margin-bottom: 0.4rem; }
+  p.body { font-size: 0.95rem; color: var(--textm); margin-bottom: 0.75rem; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <div class="brand">VALE <span>SOB ALERTA</span></div>
+  <a href="#identidade">Identidade</a>
+  <a href="#sintese">Síntese</a>
+  <a href="#metodologia">Metodologia</a>
+  <a href="#sistema">Sistema Hídrico</a>
+  <a href="#municipios">Municípios</a>
+  <a href="#linha-do-tempo">Linha do Tempo</a>
+  <a href="#governanca">Governança</a>
+  <a href="#analise">Análise</a>
+  <a href="#operacao">Operação</a>
+  <a href="#tipologia">Tipologia de Risco</a>
+  <a href="#marco-legal">Marco Legal</a>
+  <a href="#indigena">Terra Indígena</a>
+  <a href="#promessa-prova">Promessa × Prova</a>
+  <a href="#perguntas">Perguntas</a>
+  <a href="#biblioteca">Biblioteca</a>
+  <a href="#participacao">Participação</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Dossiê Público · Análise Documental Independente</div>
+    <h1>VALE <span>SOB ALERTA</span></h1>
+    <h2>Barragens, Cheias e Segurança Hídrica no Vale do Itajaí</h2>
+    <div class="hero-quote">
+      "Segurança hídrica não se promete. Se comprova."
+    </div>
+    <p class="hero-meta">
+      <strong>Carlos Wagner — Alemão da Alumetal</strong> · Curadoria pública e coordenação editorial<br>
+      <strong>Dr. Claudio Camargo — OAB/SC 64.520</strong> · Autoria técnica e jurídica<br>
+      Santa Catarina · 2026 · Última atualização: Maio/2026
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════ LEGENDA ═══════════ -->
+<section style="padding:1.5rem 0;">
+  <div class="container">
+    <div class="legend">
+      <span class="legend-item"><span class="badge badge-fact">● Fato comprovado</span> — Sustentado por documento público verificável.</span>
+      <span class="legend-item"><span class="badge badge-indic">● Indício documentado</span> — Base documental parcial, pendente de confirmação.</span>
+      <span class="legend-item"><span class="badge badge-alert">● Alerta técnico</span> — Risco identificado, gravidade atual a apurar.</span>
+      <span class="legend-item"><span class="badge badge-crit">● Ponto crítico</span> — Documento obrigatório por lei não localizado publicamente.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 1. IDENTIDADE ═══════════ -->
+<section id="identidade">
+  <div class="container">
+    <span class="sec-label">Identidade Pública</span>
+    <h2 class="sec-title">Quem está por trás deste dossiê</h2>
+    <div class="grid2">
+      <div class="card orange">
+        <h4>Carlos Wagner — Alemão da Alumetal</h4>
+        <p>Empresário com atuação no setor industrial do Vale do Itajaí. Coordenação pública e curadoria editorial do dossiê. Em momento sensível, liderou e financiou ações ligadas à operação hidráulica da Barragem Norte em 2023 e seguiu cobrando melhorias estruturais.</p>
+        <p style="margin-top:0.75rem; font-size:0.85rem; color:var(--orange); font-weight:bold;">Empresário · Blumenau/SC · Setor industrial</p>
+      </div>
+      <div class="card" style="border-left-color:var(--navy3);">
+        <h4>Dr. Claudio Camargo — OAB/SC 64.520</h4>
+        <p>Advogado responsável pela análise técnico-jurídica do dossiê. Autoria das interpretações sobre legalidade, responsabilidade pública, omissão documental e tese central do instrumento de controle social.</p>
+        <p style="margin-top:0.75rem; font-size:0.85rem; color:var(--navy3); font-weight:bold;">Analista e Autor Jurídico · Santa Catarina</p>
+      </div>
+    </div>
+
+    <div class="callout callout-navy" style="margin-top:1rem;">
+      <span class="callout-icon">📋</span>
+      <p><strong>Este material não é peça de acusação.</strong> É instrumento de controle social, feito para separar fato de promessa, documento de versão e segurança comprovada de simples tranquilização verbal. A mobilização cidadã que cobra transparência técnica, sem substituir os órgãos públicos nem antecipar julgamento de responsabilidade.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>"Segurança hídrica não se promete em nota de imprensa. Se comprova com documentos, com equipamentos funcionando e com respostas concretas para a população do Vale."</p>
+      <cite>— Carlos Wagner, Alemão da Alumetal</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 2. SÍNTESE EXECUTIVA ═══════════ -->
+<section id="sintese">
+  <div class="container">
+    <span class="sec-label">Síntese Executiva</span>
+    <h2 class="sec-title">O que os documentos já permitem afirmar</h2>
+    <p class="body">A proteção da região depende de um sistema amplo — barragens, rios, canais, drenagem urbana, comportas, alertas, manutenção, planejamento urbano e decisões técnicas coordenadas. Os 10 pontos abaixo são uma leitura rápida do tema.</p>
+    <div class="grid2">
+      <div class="card green"><h4>01 · O Vale funciona como sistema único</h4><p>As enchentes não afetam apenas uma cidade. A água desce pela bacia, passa por vários municípios e pode causar problemas em diferentes pontos do Vale.</p></div>
+      <div class="card orange"><h4>02 · Não é só uma barragem</h4><p>A segurança não depende apenas da Barragem Norte. Depende de um conjunto de ações, obras, manutenção e decisões técnicas coordenadas.</p></div>
+      <div class="card" style="border-left-color:var(--navy3);"><h4>03 · As barragens fazem parte da solução</h4><p>Ajudam a segurar parte da água, mas precisam estar funcionando bem — comportas operando, manutenção em dia e equipe técnica preparada.</p></div>
+      <div class="card" style="border-left-color:var(--navy3);"><h4>04 · Rios, canais e drenagem também importam</h4><p>Mesmo com barragens, os rios precisam ter vazão adequada, os canais precisam funcionar e as cidades precisam ter boa drenagem.</p></div>
+      <div class="card amber"><h4>05 · Operação rápida e coordenada</h4><p>Em momentos de chuva forte, as decisões precisam ser tomadas com rapidez: quando fechar comportas, quando abrir, quanto liberar e como avisar a população.</p></div>
+      <div class="card red"><h4>06 · Falhas pequenas viram grandes problemas</h4><p>Acesso bloqueado, comporta com defeito, falta de energia, falha de comunicação ou atraso na decisão podem prejudicar toda a resposta contra a enchente.</p></div>
+      <div class="card orange"><h4>07 · A população precisa ser avisada com antecedência</h4><p>Alertas claros e rápidos ajudam famílias, empresas e prefeituras a se prepararem antes que a água chegue.</p></div>
+      <div class="card" style="border-left-color:var(--navy3);"><h4>08 · As cidades também precisam fazer sua parte</h4><p>Ocupação em área de risco, drenagem ruim, ruas sem estrutura e crescimento desordenado aumentam os prejuízos.</p></div>
+      <div class="card green"><h4>09 · Estado, municípios e União juntos</h4><p>Nenhum município resolve isso sozinho. A prevenção exige união entre governo estadual, prefeituras, Defesa Civil, órgãos técnicos e governo federal.</p></div>
+      <div class="card" style="border-left-color:var(--navy3);"><h4>10 · Prevenir é mais barato que reconstruir</h4><p>Cuidar antes, fazer manutenção, investir em obras e planejar melhor custa menos do que consertar casas, empresas, estradas e vidas afetadas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 3. METODOLOGIA ═══════════ -->
+<section id="metodologia">
+  <div class="container">
+    <span class="sec-label">Metodologia · Critério de Prova</span>
+    <h2 class="sec-title">Como os documentos foram analisados</h2>
+    <p class="body">Este dossiê adota metodologia de <strong>verificação documental</strong>. Cada afirmação relevante deve estar vinculada a documento público, processo judicial, estudo técnico, relatório de controle externo, legislação ou pedido de informação.</p>
+
+    <div class="grid2">
+      <div>
+        <h3 class="sub-title">Fontes consultadas</h3>
+        <ul class="bullet">
+          <li><strong>Jurídicas:</strong> TRF4, Justiça Federal, MPF, MPE, legislação federal e estadual.</li>
+          <li><strong>Controle externo:</strong> TCE/SC, portais de transparência, SCTransferências, contratos e licitações.</li>
+          <li><strong>Administrativas:</strong> Defesa Civil/SC, SGP-e, atas, ofícios, pareceres, planos de contingência.</li>
+          <li><strong>Técnicas:</strong> JICA, ANA, SNIRH, HidroWeb, SNISB, CEMADEN, UFSC/CEPED, Comitê do Itajaí.</li>
+          <li><strong>Contexto:</strong> notícias oficiais, imprensa regional, registros fotográficos, mapas, decretos municipais.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub-title">Tese central</h3>
+        <p class="body">O Vale do Itajaí convive há décadas com risco hídrico <em>conhecido</em>. O Estado recebeu diagnósticos técnicos, firmou obrigações judiciais, anunciou soluções e foi cobrado pelo TCE/SC.</p>
+        <p class="body">Ainda assim, faltam provas públicas, claras e organizadas sobre execução, segurança, operação e transparência do sistema de proteção.</p>
+        <div class="callout callout-orange">
+          <span class="callout-icon">⚠️</span>
+          <p>A palavra <strong>"omissão"</strong> neste dossiê não significa culpa individual. Significa a persistência documentada de problemas conhecidos sem comprovação pública clara de resolução.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 4. SISTEMA HÍDRICO ═══════════ -->
+<section id="sistema">
+  <div class="container">
+    <span class="sec-label">Sistema Hídrico</span>
+    <h2 class="sec-title">Três barragens, uma bacia, muitos municípios atingidos</h2>
+    <p class="body">O Projeto JICA demonstra que a proteção do Vale não depende apenas das barragens, mas de um sistema integrado de obras, monitoramento, alerta, manutenção, planejamento urbano e decisões técnicas coordenadas.</p>
+
+    <div class="pull-quote">
+      <p>"No Vale do Itajaí, a água não respeita fronteira municipal. Uma decisão mal coordenada em um ponto da bacia pode aumentar o risco em outra cidade."</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card" style="border-left-color:var(--navy3);">
+        <h4>3.1 — Como a bacia funciona</h4>
+        <p>O Rio Itajaí do Oeste e o Itajaí do Sul se encontram em Rio do Sul, iniciando o Itajaí-Açu. Em Ibirama, o Itajaí-Açu recebe o Rio Hercílio/Itajaí do Norte. Depois segue pelo Médio e Baixo Vale até a foz em Itajaí.</p>
+      </div>
+      <div class="card orange">
+        <h4>3.2 — Sete barragens não executadas</h4>
+        <p>O JICA analisou 7 pequenas barragens complementares a montante de Rio do Sul. Elas <strong>não foram executadas</strong>, demonstrando que as três existentes não são a solução completa para o Vale.</p>
+      </div>
+      <div class="card amber">
+        <h4>3.5 — Gargalos hidráulicos</h4>
+        <p>Assoreamento, estreitamento da calha, ocupação de áreas impróprias, pontes e aterros podem prejudicar o escoamento mesmo com barragens operando.</p>
+      </div>
+      <div class="card green">
+        <h4>3.7 — Previsão e monitoramento</h4>
+        <p>Chuva, nível dos rios, vazão, comportamento dos reservatórios e previsão meteorológica precisam ser acompanhados de forma integrada com alertas e comunicação organizados.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Municípios, rios e barragens — conexões sistêmicas</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Município / trecho</th><th>Rio principal</th><th>Barragem / sistema</th><th>Tipo de impacto</th><th>Referência</th>
+        </tr></thead>
+        <tbody>
+          <tr><td><strong>José Boiteux</strong></td><td>Itajaí do Norte / Hercílio</td><td>Barragem Norte</td><td>Área imediatamente associada; risco extremo em cenário hipotético de ruptura</td><td>ABRHidro 2022</td></tr>
+          <tr><td><strong>Ibirama</strong></td><td>Itajaí do Norte e Itajaí-Açu</td><td>Barragem Norte + confluência</td><td>Ponto de entrada do Itajaí do Norte; onda estimada a ≈ 42 km da barragem</td><td>ABRHidro 2022</td></tr>
+          <tr><td><strong>Taió</strong></td><td>Itajaí do Oeste</td><td>Barragem Oeste</td><td>Controle parcial das cheias do Itajaí do Oeste; influência no volume para Rio do Sul</td><td>JICA 2011</td></tr>
+          <tr><td><strong>Ituporanga</strong></td><td>Itajaí do Sul</td><td>Barragem Sul</td><td>Controle parcial das cheias do Itajaí do Sul; influência sobre Rio do Sul e municípios a jusante</td><td>JICA 2011</td></tr>
+          <tr><td><strong>Rio do Sul</strong></td><td>Itajaí do Oeste + Itajaí do Sul / formação Itajaí-Açu</td><td>Sistema Sul + Oeste; influência do Norte a jusante</td><td>Ponto sensível de formação do Itajaí-Açu; limitação de escoamento, alagamentos recorrentes</td><td>JICA 2011</td></tr>
+          <tr><td><strong>Lontras</strong></td><td>Itajaí-Açu</td><td>Sistema Sul/Oeste + calha fluvial</td><td>Trecho crítico por baixa capacidade de escoamento e remanso hidráulico</td><td>JICA 2011 / Seção 7</td></tr>
+          <tr><td><strong>Blumenau</strong></td><td>Itajaí-Açu</td><td>Sistema integrado da bacia</td><td>Recebe volume acumulado do Alto e Médio Vale; impacto urbano, econômico e histórico relevante</td><td>Histórico / JICA 2011</td></tr>
+          <tr><td><strong>Gaspar</strong></td><td>Itajaí-Açu</td><td>Sistema integrado</td><td>Município a jusante de Blumenau; recebe reflexos do volume acumulado</td><td>Histórico / JICA 2011</td></tr>
+          <tr><td><strong>Ilhota / Itajaí</strong></td><td>Itajaí-Açu / foz</td><td>Sistema integrado</td><td>Baixo Vale e foz; recebe volume final da bacia com influência de drenagem, maré e escoamento</td><td>JICA 2011 / Histórico</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 5. MUNICÍPIOS ═══════════ -->
+<section id="municipios">
+  <div class="container">
+    <span class="sec-label">Impacto Local · Municípios</span>
+    <h2 class="sec-title">Como o sistema de barragens afeta cada cidade</h2>
+    <p class="body">No Vale do Itajaí, a água não para na divisa entre municípios. Uma decisão tomada a montante pode alterar o nível do rio e produzir efeitos concretos em outra cidade poucas horas depois.</p>
+
+    <div class="grid2">
+      <div class="card red">
+        <h4>José Boiteux</h4>
+        <p>Município diretamente vinculado à Barragem Norte. Área de atenção máxima em cenários de falha, operação emergencial, enchimento do reservatório ou dificuldade de acesso à estrutura.</p>
+        <div class="pq">❓ Qual é o plano atualizado de evacuação, alerta e atendimento da população local?</div>
+      </div>
+      <div class="card red">
+        <h4>Ibirama</h4>
+        <p>A jusante da Barragem Norte. Especialmente relevante em estudos de ruptura hipotética — onda estimada pela ABRHidro 2022 a ≈ 42 km da barragem.</p>
+        <div class="pq">❓ Em cenário extremo, quanto tempo antes a população seria avisada e por qual canal oficial?</div>
+      </div>
+      <div class="card amber">
+        <h4>Taió</h4>
+        <p>Diretamente relacionado à Barragem Oeste. Sua operação influencia o volume de água que segue em direção a Rio do Sul e ao restante da bacia.</p>
+        <div class="pq">❓ Qual é a condição atual das comportas, sistemas hidráulicos e procedimentos de operação?</div>
+      </div>
+      <div class="card amber">
+        <h4>Ituporanga</h4>
+        <p>Diretamente relacionado à Barragem Sul. Sua operação influencia o volume de água que segue para Rio do Sul e para o Itajaí-Açu.</p>
+        <div class="pq">❓ As obras, manutenções e procedimentos anunciados foram testados, documentados e validados em operação real?</div>
+      </div>
+      <div class="card orange">
+        <h4>Rio do Sul</h4>
+        <p>Ponto sensível: é onde o Itajaí do Sul e o Itajaí do Oeste se encontram, dando início ao Rio Itajaí-Açu. O risco está na combinação entre volume, baixa capacidade de escoamento e operação coordenada.</p>
+        <div class="pq">❓ Existe matriz integrada de decisão para operação das barragens Sul e Oeste, considerando reflexos da Barragem Norte?</div>
+      </div>
+      <div class="card" style="border-left-color:var(--navy3);">
+        <h4>Blumenau</h4>
+        <p>Impactado pelo volume acumulado da bacia. No Manual de Operação, aparece como referência de restrição operativa de jusante para a Barragem Norte.</p>
+        <div class="pq">❓ Qual é o canal oficial, permanente e documentado que informa Blumenau sobre fechamento, abertura e alteração operacional das comportas?</div>
+      </div>
+      <div class="card" style="border-left-color:var(--navy3);">
+        <h4>Gaspar / Ilhota / Itajaí</h4>
+        <p>Municípios do Médio e Baixo Vale, sujeitos aos efeitos do volume acumulado. Itajaí na foz recebe o volume final, com influência adicional de maré e escoamento.</p>
+        <div class="pq">❓ Quais informações chegam ao município antes do pico da cheia e com que antecedência?</div>
+      </div>
+    </div>
+
+    <div class="callout callout-orange" style="margin-top:1rem;">
+      <span class="callout-icon">🌊</span>
+      <p>No Vale do Itajaí, uma decisão mal coordenada não fica presa ao local onde foi tomada. Ela desce com a água, atravessa cidades, atinge famílias e transforma a falta de planejamento em prejuízo real para quem vive rio abaixo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 6. LINHA DO TEMPO ═══════════ -->
+<section id="linha-do-tempo">
+  <div class="container">
+    <span class="sec-label">Linha do Tempo</span>
+    <h2 class="sec-title">Cinco décadas entre enchentes, diagnósticos, promessas e lacunas</h2>
+    <p class="body">Eventos históricos, estudos técnicos, auditorias, decisões judiciais, acordos, licitações e marcos normativos relacionados à segurança hídrica no Vale do Itajaí.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot navy"></div>
+        <div class="tl-year">1957–1962</div>
+        <div class="tl-title">Primeiro ciclo técnico — DNOS / Machado da Costa</div>
+        <div class="tl-body">Após as grandes enchentes de 1957, tem início o ciclo institucional. Em 1959, já havia proposta de construção de um conjunto de barragens: Norte, Oeste, Sul, Benedito, Subida, Rafael e Itajaí-Mirim.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot navy"></div>
+        <div class="tl-year">1962–1963</div>
+        <div class="tl-title">Início das obras das Barragens Sul (Ituporanga) e Oeste (Taió)</div>
+        <div class="tl-body">Barragem Oeste entra em operação em 1973; Barragem Sul, em 1976. O sistema regional passa a contar com duas barragens de contenção em funcionamento.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-year">1983–1984</div>
+        <div class="tl-title">Grandes enchentes no Vale do Itajaí</div>
+        <div class="tl-body">Evidenciam a vulnerabilidade histórica da região e reforçam a necessidade de sistema permanente de prevenção, contenção, monitoramento e resposta.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot navy"></div>
+        <div class="tl-year">1986–1988</div>
+        <div class="tl-title">Convênio JICA e Projeto original — Plano Diretor de Controle de Cheias</div>
+        <div class="tl-body">Firmado convênio entre o DNOS e a JICA. O projeto consolidou diagnóstico técnico sobre o controle de enchentes na Bacia do Itajaí, incluindo trechos críticos como Blumenau–Gaspar e Rio do Sul–Lontras.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-year">1990</div>
+        <div class="tl-title">Extinção do DNOS — descontinuidade na gestão do sistema</div>
+        <div class="tl-body">Com a extinção do DNOS, houve abandono dos serviços de manutenção do sistema de contenção. Marco explicativo da descontinuidade institucional entre construção, operação e modernização. <span class="badge badge-crit">Ponto crítico</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-year">1992–1993</div>
+        <div class="tl-title">Conclusão e início da operação da Barragem Norte</div>
+        <div class="tl-body">A Barragem Norte, em José Boiteux, foi concluída em 1992 e entrou em operação em novembro de 1993. Também em 1992: Protocolo com os povos indígenas — primeiro marco formal de tentativa de composição.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-year">2003</div>
+        <div class="tl-title">Decisão judicial de reparação indígena</div>
+        <div class="tl-body">A Justiça reconheceu obrigações relacionadas às comunidades indígenas afetadas pela Barragem Norte. Em 2025, o MPF registrou que medidas buscavam dar início ao cumprimento dessa decisão — 22 anos depois. <span class="badge badge-crit">Ponto crítico</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-year">2008</div>
+        <div class="tl-title">Catástrofe no Vale do Itajaí</div>
+        <div class="tl-body">Chuvas de novembro produziram uma das maiores tragédias climáticas da história de Santa Catarina, com mortes, desabrigados e ampla destruição. Evidenciou a vulnerabilidade regional.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot navy"></div>
+        <div class="tl-year">2009–2011</div>
+        <div class="tl-title">Novo estudo preparatório JICA e revisão do diagnóstico</div>
+        <div class="tl-body">Após 2008, desenvolvido novo estudo com apoio da JICA. O estudo consolidou visão integrada para a Bacia com medidas estruturais e não estruturais, considerando barragens, rios, escoamento, alertas e monitoramento.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-year">2010–2012</div>
+        <div class="tl-title">Marco Legal: Leis 12.334/2010 e 12.608/2012</div>
+        <div class="tl-body">A Lei 12.334/2010 instituiu a Política Nacional de Segurança de Barragens. A Lei 12.608/2012 instituiu a Política Nacional de Proteção e Defesa Civil. A operação das barragens passa ao Estado de SC em 2012.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-year">2014</div>
+        <div class="tl-title">Depredação da Barragem Norte + Auditoria TCE/SC</div>
+        <div class="tl-body">A Barragem Norte sofreu invasão e danos em componentes hidráulicos, elétricos e mecânicos. O TCE/SC realizou auditoria operacional, apontando inexistência de documentos essenciais e deficiência na manutenção das três barragens. <span class="badge badge-crit">Ponto crítico</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot amber"></div>
+        <div class="tl-year">2015</div>
+        <div class="tl-title">Decisão nº 1945/2015 do TCE/SC</div>
+        <div class="tl-body">A auditoria resultou em determinações e recomendações ao Estado. Transforma falhas técnicas em cobrança formal de órgão de controle externo, incluindo providências sobre planos, propriedade das barragens e manuais. <span class="badge badge-alert">Alerta técnico</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot navy"></div>
+        <div class="tl-year">2018</div>
+        <div class="tl-title">Dois processos judiciais centrais iniciam na Justiça Federal de Blumenau</div>
+        <div class="tl-body">ACP nº 5012227 (segurança e operação da Barragem Norte) e ACP nº 5013528 (reparação indígena Laklãnõ-Xokleng). O tema deixa de ser apenas administrativo e passa a envolver controle judicial permanente.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot amber"></div>
+        <div class="tl-year">2019</div>
+        <div class="tl-title">Vistorias apontam persistência de problemas + convênios federais firmados</div>
+        <div class="tl-body">Problemas verificados em 2023 já haviam sido identificados em 2019. Convênios 883988 e 883989/2019 para reforma e canal da Barragem Norte (R$ 9,5 milhões), com vigência que se encerraria em 2025–2026. <span class="badge badge-alert">Alerta técnico</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot amber"></div>
+        <div class="tl-year">2020</div>
+        <div class="tl-title">R$ 21 milhões anunciados para Barragem Norte — execução não comprovada</div>
+        <div class="tl-body">R$ 15,7 milhões para canal extravasor e R$ 5,3 milhões para intervenções de recuperação. A execução posterior foi marcada por entraves, licitações frustradas e ausência de entrega pública comprovada. <span class="badge badge-crit">Ponto crítico</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-year">2021–2022</div>
+        <div class="tl-title">Laudo aponta estado precário · RSR da Barragem Norte não encaminhado</div>
+        <div class="tl-body">Documento técnico de setembro/2021 apontou estado precário e ausência de equipamentos na Barragem Norte. Para 2022, não foi encaminhada documentação de inspeção nem Relatório de Segurança Regular. <span class="badge badge-crit">Ponto crítico</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-year">Jan. 2023</div>
+        <div class="tl-title">Anulação da licitação para recuperação da Barragem Norte</div>
+        <div class="tl-body">Registrada a anulação da Concorrência nº 021/2022, cujo objeto era a contratação para execução da recuperação da Barragem Norte, em José Boiteux. <span class="badge badge-crit">Ponto crítico</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-year">Out. 2023</div>
+        <div class="tl-title">Fechamento emergencial · conflito · decisão judicial · operação por cidadão</div>
+        <div class="tl-body">Durante cheias de outubro de 2023, a Justiça Federal autorizou ingresso de agentes do Estado na Barragem Norte. As comportas foram fechadas após decisão judicial, em meio a conflito com a comunidade indígena. Carlos Wagner, o Alemão da Alumetal, liderou e custeia operação que cabia ao Estado. O TCE/SC registra que a Barragem Norte estava <strong>inoperante</strong>, com restrição de funcionamento. <span class="badge badge-crit">Ponto crítico</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot navy"></div>
+        <div class="tl-year">2024</div>
+        <div class="tl-title">Manual de Operação publicado · editais para novas barragens · TCE suspende por sobrepreço</div>
+        <div class="tl-body">A Defesa Civil consolidou critérios operacionais. Publicados editais para barragens em Mirim Doce e Botuverá. Em dezembro/2024, o TCE/SC suspendeu ambos os editais por indícios de sobrepreço e inconsistências técnicas.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-year">Jan. 2025</div>
+        <div class="tl-title">Anulação dos certames de Mirim Doce e Botuverá</div>
+        <div class="tl-body">Após suspensão cautelar e questionamentos do TCE/SC, os processos licitatórios das novas barragens foram anulados. Anúncios de grandes obras precisam de projetos sólidos e orçamento confiável. <span class="badge badge-crit">Ponto crítico</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot amber"></div>
+        <div class="tl-year">Mar. 2025</div>
+        <div class="tl-title">Novo vandalismo na Barragem Norte + 1º acordo para manutenção</div>
+        <div class="tl-body">MPF instaurou procedimento para apurar atos de vandalismo. Governo do Estado anunciou acordo com lideranças indígenas para vistoria e manutenção da Barragem Norte.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot amber"></div>
+        <div class="tl-year">Ago. 2025</div>
+        <div class="tl-title">2º acordo articulado pelo MPF · mais de R$ 70 milhões</div>
+        <div class="tl-body">MPF anunciou articulação de acordo para início do cumprimento da decisão judicial de 2003, com obras estruturais e sociais na Terra Indígena Laklãnõ-Xokleng e municípios vizinhos. Ordens de serviço assinadas para pacote superior a R$ 70 milhões. <span class="badge badge-indic">Indício documentado</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-year">Out. 2025</div>
+        <div class="tl-title">Barragem Sul modernizada com operação remota</div>
+        <div class="tl-body">Estado anunciou modernização da Barragem Sul com substituição de comportas, melhorias elétricas e operação remota. Avanço documentado em uma das estruturas — reforça a necessidade de verificar o mesmo padrão nas demais. <span class="badge badge-indic">Indício documentado</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-year">Dez. 2025</div>
+        <div class="tl-title">TCE/SC suspende novamente licitação da Barragem de Botuverá</div>
+        <div class="tl-body">Decisão aponta problemas no orçamento: taxa de risco sem cálculo, divergências na administração local e falta de índices de reajuste. Obra orçada em R$ 159,57 milhões.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot amber"></div>
+        <div class="tl-year">Jan.–Fev. 2026</div>
+        <div class="tl-title">3º acordo + fase final da licitação da reforma da Barragem Norte · TCE libera Botuverá</div>
+        <div class="tl-body">Estado anunciou avanços dos acordos e andamento decisivo da licitação para reforma da Barragem Norte. TCE revogou cautelar de Botuverá após ajustes. Programa SC Protegida e Resiliente estruturado. <span class="badge badge-indic">Indício documentado</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot amber"></div>
+        <div class="tl-year">Abr. 2026</div>
+        <div class="tl-title">Convênios federais encerrados — execução ainda a comprovar</div>
+        <div class="tl-body">Os convênios federais de 2019 para reforma da Barragem Norte e canal extravasor chegaram ao fim de sua vigência. A população precisa saber o que foi efetivamente executado, medido, entregue e colocado em funcionamento. <span class="badge badge-crit">Ponto crítico</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot amber"></div>
+        <div class="tl-year">Mai. 2026</div>
+        <div class="tl-title">Estado anuncia barragens em operação + R$ 900 milhões em Defesa Civil</div>
+        <div class="tl-body">Defesa Civil informa que as três barragens estão em condições de operação. Estado anuncia mais de R$ 900 milhões em Defesa Civil entre 2023 e 2026. A pergunta objetiva: <em>quais laudos, testes, relatórios e ARTs comprovam a plena condição operacional?</em> <span class="badge badge-crit">Ponto crítico</span></div>
+      </div>
+    </div>
+
+    <div class="callout callout-red" style="margin-top:2rem;">
+      <span class="callout-icon">📍</span>
+      <p><strong>Fechamento:</strong> A linha do tempo revela um padrão claro: o risco é antigo, os diagnósticos existem, os recursos foram anunciados, os convênios foram firmados e as obrigações foram assumidas. Ainda assim, a execução segue sem comprovação pública suficiente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 7. GOVERNANÇA ═══════════ -->
+<section id="governanca">
+  <div class="container">
+    <span class="sec-label">Governança · Responsabilidade Pública</span>
+    <h2 class="sec-title">Quem é responsável por cada decisão?</h2>
+    <p class="body">Segurança de barragem depende de cadeia clara de comando. O cidadão precisa saber quem é proprietário, quem opera, quem fiscaliza, quem assina tecnicamente e quem responde por falhas.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Barragem</th><th>Proprietário formal</th><th>Operador atual</th><th>Fiscalização</th><th>Responsável técnico</th><th>ART localizada</th><th>Pendência</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Norte</strong></td>
+            <td class="td-critical">A confirmar por documento oficial</td>
+            <td class="td-critical">A confirmar</td>
+            <td class="td-critical">A confirmar</td>
+            <td class="td-critical">Não localizado publicamente</td>
+            <td class="td-critical">Não localizada</td>
+            <td>Cadeia de comando, ART e matriz de decisão</td>
+          </tr>
+          <tr>
+            <td><strong>Sul</strong></td>
+            <td class="td-critical">A confirmar por documento oficial</td>
+            <td class="td-critical">A confirmar</td>
+            <td class="td-critical">A confirmar</td>
+            <td class="td-critical">Não localizado publicamente</td>
+            <td class="td-critical">Não localizada</td>
+            <td>Termo de recebimento, testes e ART</td>
+          </tr>
+          <tr>
+            <td><strong>Oeste</strong></td>
+            <td class="td-critical">A confirmar por documento oficial</td>
+            <td class="td-critical">A confirmar</td>
+            <td class="td-critical">A confirmar</td>
+            <td class="td-critical">Não localizado publicamente</td>
+            <td class="td-critical">Não localizada</td>
+            <td>Automação, laudo de comportas e cronograma</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-red">
+      <span class="callout-icon">⚠️</span>
+      <p>Sem responsável técnico identificado, ART vigente e matriz formal de decisão, a transparência fica comprometida. Em uma estrutura de risco coletivo, a responsabilidade não pode ser invisível.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 8. ANÁLISE INDIVIDUAL ═══════════ -->
+<section id="analise">
+  <div class="container">
+    <span class="sec-label">Análise Individual das Barragens</span>
+    <h2 class="sec-title">Cada barragem tem um problema próprio. O risco é sistêmico.</h2>
+
+    <div class="card red" style="margin-bottom:1.5rem;">
+      <h4>🔴 Barragem Norte — José Boiteux</h4>
+      <p><strong>Rio:</strong> Rio Hercílio (Itajaí do Norte) · <strong>Função:</strong> maior estrutura de contenção do sistema · <strong>Classificação:</strong> Risco médio (SEMAE)</p>
+      <ul class="bullet" style="margin-top:0.75rem;">
+        <li>Histórico de conflito de acesso à estrutura.</li>
+        <li>Comportas com registros de falhas e necessidade de recuperação.</li>
+        <li>Canal extravasor projetado, mas sem execução final comprovada.</li>
+        <li>Plano de Ação de Emergência com status de atualização a confirmar.</li>
+        <li>Simulação técnica de ruptura hipotética (ABRHidro 2022) com danos severos a jusante.</li>
+        <li>Necessidade de comprovação pública da condição atual de operação.</li>
+      </ul>
+      <div class="pq" style="margin-top:1rem;">
+        <strong>Perguntas sem resposta pública:</strong><br>
+        Qual é a condição real de cada comporta? · Existe teste recente com foto, vídeo, ART e relatório técnico? · O canal extravasor possui projeto executivo, contrato, cronograma e execução comprovada? · Quem assina tecnicamente pela segurança atual?
+      </div>
+    </div>
+
+    <div class="card amber" style="margin-bottom:1.5rem;">
+      <h4>🟡 Barragem Sul — Ituporanga</h4>
+      <p><strong>Rio:</strong> Itajaí do Sul · <strong>Função:</strong> controle parcial das cheias do Itajaí do Sul, com influência sobre Rio do Sul e municípios a jusante</p>
+      <ul class="bullet" style="margin-top:0.75rem;">
+        <li>Obra de substituição ou recuperação de comportas anunciada.</li>
+        <li>Modernização com operação remota divulgada pelo Estado.</li>
+        <li>Necessidade de comprovação de testes operacionais.</li>
+        <li>Necessidade de termo de recebimento definitivo da obra.</li>
+        <li>Necessidade de ARTs, relatórios técnicos e registros de funcionamento.</li>
+      </ul>
+      <div class="pq" style="margin-top:1rem;">
+        <strong>Perguntas sem resposta pública:</strong><br>
+        Todas as comportas foram efetivamente substituídas? · Existe termo de recebimento definitivo? · A operação remota foi testada em cenário real de cheia? · Quem é o responsável técnico pela operação atual?
+      </div>
+    </div>
+
+    <div class="card" style="border-left-color:var(--navy3); margin-bottom:1.5rem;">
+      <h4>🔵 Barragem Oeste — Taió</h4>
+      <p><strong>Rio:</strong> Itajaí do Oeste · <strong>Função:</strong> controle parcial das cheias do Itajaí do Oeste, com influência sobre Taió, Rio do Oeste, Rio do Sul</p>
+      <ul class="bullet" style="margin-top:0.75rem;">
+        <li>Condição atual das comportas a comprovar publicamente.</li>
+        <li>Possível dependência de operação presencial.</li>
+        <li>Automação anunciada ou discutida, mas com cronograma a confirmar.</li>
+        <li>Necessidade de laudo técnico atualizado das comportas e sistemas hidráulicos.</li>
+        <li>Necessidade de comprovação de manutenção preventiva e corretiva.</li>
+      </ul>
+      <div class="pq" style="margin-top:1rem;">
+        <strong>Perguntas sem resposta pública:</strong><br>
+        Qual é a condição atual de cada comporta? · A operação ainda depende de presença física? · Existe cronograma aprovado para automação? · Quem responde tecnicamente pela operação atual?
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 9. OPERAÇÃO ═══════════ -->
+<section id="operacao">
+  <div class="container">
+    <span class="sec-label">Operação · Papel versus Prática</span>
+    <h2 class="sec-title">O Manual de Operação resolve o problema na prática?</h2>
+    <p class="body">A existência de um Manual de Operação é importante, mas não comprova, por si só, que o sistema está seguro. Um manual só tem valor operacional quando está formalmente aprovado, assinado por responsável técnico, acompanhado de ART, conhecido pelos municípios e testado em simulações.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Item</th><th>O que precisa existir</th><th>Comprovação localizada</th><th>Situação</th>
+        </tr></thead>
+        <tbody>
+          <tr><td><strong>Aprovação formal</strong></td><td>Documento final aprovado pelo órgão competente, com versão vigente e data</td><td class="td-partial">Parcial</td><td>Confirmar versão vigente, órgão aprovador e ato formal</td></tr>
+          <tr><td><strong>Responsável técnico</strong></td><td>Assinatura técnica, identificação do profissional e ART correspondente</td><td class="td-critical">Não localizada</td><td>Apresentar ART vigente e responsável técnico</td></tr>
+          <tr><td><strong>Treinamento dos municípios</strong></td><td>Registros de capacitação, lista de presença, datas, conteúdo e municípios participantes</td><td class="td-critical">Não localizado</td><td>Comprovar treinamento regional dos municípios a jusante</td></tr>
+          <tr><td><strong>Simulado operacional</strong></td><td>Relatório de teste com cenário de cheia, abertura e fechamento de comportas, falha elétrica</td><td class="td-critical">Não localizado</td><td>Realizar, documentar e publicar simulado operacional</td></tr>
+          <tr><td><strong>Acesso físico à Barragem Norte</strong></td><td>Garantia permanente de acesso técnico em situação de emergência</td><td class="td-critical">Conflito documentado</td><td>Apresentar plano de acesso seguro, formal e pactuado</td></tr>
+          <tr><td><strong>Comunicação oficial</strong></td><td>Canal formal de aviso aos municípios, com responsáveis, prazos e registros</td><td class="td-critical">Não localizado</td><td>Comprovar protocolo e histórico de acionamentos</td></tr>
+          <tr><td><strong>Energia e contingência</strong></td><td>Plano para falha elétrica, operação manual, equipamentos reserva e tempo de resposta</td><td class="td-critical">Não localizado</td><td>Apresentar plano de contingência operacional</td></tr>
+          <tr><td><strong>Registro de decisões</strong></td><td>Ata, relatório ou sistema que registre quem decidiu, quando e com quais dados</td><td class="td-critical">Não localizado</td><td>Publicar matriz de decisão e registros operacionais</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-red">
+      <span class="callout-icon">🎯</span>
+      <p><strong>Pergunta técnica central:</strong> Em uma cheia real, com chuva intensa, reservatório elevado, falha elétrica e bloqueio de acesso, o Manual de Operação é efetivamente executável ou depende de condições que ainda não estão garantidas?</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 10. GARGALO HIDRÁULICO ═══════════ -->
+<section>
+  <div class="container">
+    <span class="sec-label">Gargalo Hidráulico</span>
+    <h2 class="sec-title">Quando a água não consegue escoar</h2>
+    <p class="body">A barragem ajuda a reter parte da água, mas isso não resolve o problema se o rio não tiver capacidade suficiente para escoar o volume acumulado. A cheia não depende apenas do nível dos reservatórios.</p>
+    <div class="grid2">
+      <div>
+        <h3 class="sub-title">Fatores que agravam o gargalo</h3>
+        <ul class="bullet">
+          <li>Baixa declividade em trechos críticos (Rio do Sul/Lontras).</li>
+          <li>Encontro do Itajaí do Sul com o Itajaí do Oeste em Rio do Sul.</li>
+          <li>Efeito de remanso hidráulico.</li>
+          <li>Ocupação urbana em áreas historicamente sujeitas à inundação.</li>
+          <li>Assoreamento, estreitamento da calha e margens degradadas.</li>
+          <li>Falta de manutenção contínua dos trechos críticos do rio.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub-title">Consequências sem intervenção</h3>
+        <ul class="bullet">
+          <li>Alagamento prolongado, mesmo com barragens em operação.</li>
+          <li>Dificuldade para liberar água dos reservatórios durante a cheia.</li>
+          <li>Risco de nova chuva com reservatórios ainda cheios.</li>
+          <li>Redução do tempo de resposta para alerta e evacuação.</li>
+          <li>Danos cumulativos à infraestrutura urbana, pontes e vias.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout callout-orange" style="margin-top:1rem;">
+      <span class="callout-icon">💧</span>
+      <p>Segurar a água na barragem não basta. O sistema só funciona quando a água retida, liberada ou acumulada encontra um rio capaz de escoar com segurança.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 11. TIPOLOGIA DE RISCO ═══════════ -->
+<section id="tipologia">
+  <div class="container">
+    <span class="sec-label">Tipologia de Risco</span>
+    <h2 class="sec-title">Uma barragem pode causar desastre mesmo sem romper</h2>
+    <p class="body">A segurança de uma barragem não depende apenas de a estrutura "romper" ou "não romper". Existem falhas estruturais, operacionais e institucionais que podem gerar risco grave mesmo sem ruptura total.</p>
+
+    <div class="grid2">
+      <div class="card red"><h4>Rompimento</h4><p>Ruptura total ou parcial da estrutura, com liberação súbita e descontrolada da água acumulada. O cenário mais extremo e normalmente o mais lembrado.</p></div>
+      <div class="card red"><h4>Galgamento</h4><p>Água passa por cima da estrutura ou parte dela. Pode causar erosão progressiva e evoluir para ruptura, especialmente em barragens de terra.</p></div>
+      <div class="card amber"><h4>Falha de comportas</h4><p>Podem falhar de duas formas: não abrir (quando precisam aliviar o reservatório) ou não fechar (quando precisam reter água). O risco passa a ser operacional.</p></div>
+      <div class="card amber"><h4>Falha elétrica / de acionamento</h4><p>Sistemas de comportas dependem de energia, acionamento mecânico ou automação. A ausência de gerador testado pode impedir a operação em momento crítico.</p></div>
+      <div class="card orange"><h4>Falha de comunicação</h4><p>A operação depende de dados de chuva, nível dos rios, volume dos reservatórios e comunicação com municípios a jusante. Sem informação em tempo real, a decisão chega tarde.</p></div>
+      <div class="card orange"><h4>Falta de acesso físico</h4><p>Estrada interditada, bloqueio de acesso, ponte comprometida ou conflito podem impedir operação manual, vistoria e reparo emergencial.</p></div>
+    </div>
+
+    <h3 class="sub-title">Três camadas de risco independentes</h3>
+    <div class="grid2">
+      <div class="card red">
+        <h4>1. Risco Estrutural</h4>
+        <p>Condição física da barragem: comportas, vertedouro, canal extravasor, erosão, infiltração, instrumentação e piezômetros. <strong>Sem laudo e ART, a população não pode verificar a real condição estrutural.</strong></p>
+      </div>
+      <div class="card amber">
+        <h4>2. Risco Operacional</h4>
+        <p>Capacidade de agir durante emergência: acesso físico, equipe técnica, energia, automação, protocolo de abertura e fechamento, registro de decisões.</p>
+      </div>
+    </div>
+    <div class="card orange">
+      <h4>3. Risco Institucional</h4>
+      <p>Governança, transparência e responsabilização: documentos públicos incompletos, promessas sem comprovação de execução, licitações anuladas, responsabilidade administrativa fragmentada, judicialização sem cumprimento efetivo.</p>
+      <p style="margin-top:0.5rem; font-size:0.85rem;"><span class="badge badge-indic">Indício documentado</span> Os relatórios do TCE/SC, as ações judiciais no TRF4 e os sucessivos anúncios indicam que o problema não é apenas técnico. É também institucional.</p>
+    </div>
+
+    <h3 class="sub-title" style="margin-top:2rem;">Eventos internacionais de referência</h3>
+    <div class="grid2">
+      <div class="card" style="border-left-color:var(--navy3);">
+        <h4>Vajont, Itália (1963)</h4>
+        <p>A barragem estava estruturalmente íntegra. Um deslizamento atingiu o reservatório, gerando onda que destruiu localidades a jusante. O risco estava no entorno, no reservatório e na decisão técnica — não apenas no concreto.</p>
+      </div>
+      <div class="card" style="border-left-color:var(--navy3);">
+        <h4>Tous, Espanha (1982)</h4>
+        <p>Falha operacional em cadeia: perda de energia, comportas inoperantes, gerador comprometido, acesso bloqueado por inundação. Resultado: galgamento e ruptura. <em>Emergência não permite improviso.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 12. MARCO LEGAL ═══════════ -->
+<section id="marco-legal">
+  <div class="container">
+    <span class="sec-label">Marco Legal</span>
+    <h2 class="sec-title">O que a Lei de Segurança de Barragens exige que seja comprovado</h2>
+    <p class="body">A Lei nº 12.334/2010 não trata segurança como simples declaração administrativa. Ela exige documentação, classificação, inspeção, plano de segurança, registros técnicos, comunicação, fiscalização e identificação de responsabilidades.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Instrumento legal / técnico</th><th>O que deve existir</th><th>Situação no dossiê</th>
+        </tr></thead>
+        <tbody>
+          <tr><td><strong>PSB — Plano de Segurança de Barragem</strong></td><td>Documento técnico atualizado para cada barragem, com dados da estrutura, operação, manutenção, inspeções e equipe responsável</td><td class="td-critical">Não localizado publicamente de forma completa para as três barragens</td></tr>
+          <tr><td><strong>CRI — Categoria de Risco</strong></td><td>Classificação formal conforme características técnicas, estado de conservação, método construtivo, idade e operação</td><td class="td-critical">Classificação oficial atualizada não localizada publicamente</td></tr>
+          <tr><td><strong>DPA — Dano Potencial Associado</strong></td><td>Classificação do impacto potencial em caso de rompimento, considerando vidas humanas, impactos sociais, econômicos e ambientais</td><td class="td-critical">Mapeamento público completo e atualizado não localizado</td></tr>
+          <tr><td><strong>PAE — Plano de Ação de Emergência</strong></td><td>Situações de emergência, responsáveis, agentes a notificar, rotas, alertas e comunicação às comunidades afetadas</td><td class="td-critical">Situação atual não comprovada publicamente para cada barragem</td></tr>
+          <tr><td><strong>Inspeções Regulares de Segurança</strong></td><td>Relatórios periódicos com equipe qualificada, registros técnicos, fotografias, recomendações e medidas corretivas</td><td class="td-partial">TCE/SC aponta cumprimento parcial, especialmente na Barragem Norte</td></tr>
+          <tr><td><strong>Revisão Periódica de Segurança</strong></td><td>Avaliação técnica do estado geral da barragem, considerando projeto, operação, dados hidrológicos</td><td class="td-critical">Revisões atualizadas não localizadas publicamente de forma consolidada</td></tr>
+          <tr><td><strong>Responsável técnico com ART</strong></td><td>Profissional habilitado, nominalmente identificado, com ART vinculada a estudos, planos, inspeções e operação</td><td class="td-critical">ARTs vigentes não localizadas publicamente</td></tr>
+          <tr><td><strong>Sistema de aviso a jusante</strong></td><td>Estratégia de comunicação e alerta para municípios e comunidades potencialmente afetadas</td><td class="td-partial">Mencionado em documentos, mas sem comprovação pública suficiente de funcionamento testado</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-navy" style="margin-top:1rem;">
+      <span class="callout-icon">⚖️</span>
+      <p><strong>Tese jurídica central:</strong> A omissão em prevenir pode ser tão relevante quanto o erro em agir. Quando o risco é conhecido, documentado e previsível, a ausência de manutenção, plano, inspeção, alerta, responsável técnico ou matriz de decisão pode caracterizar falha do serviço público.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 13. TERRA INDÍGENA ═══════════ -->
+<section id="indigena">
+  <div class="container">
+    <span class="sec-label">Terra Indígena Ibirama-Laklãnõ</span>
+    <h2 class="sec-title">Não é uma população contra a outra. É o Estado devendo proteção a ambas.</h2>
+    <p class="body">A Barragem Norte foi construída dentro da Terra Indígena Ibirama-Laklãnõ, em contexto histórico marcado por impactos territoriais, sociais e administrativos que não foram integralmente solucionados.</p>
+
+    <div class="callout callout-navy">
+      <span class="callout-icon">🏛️</span>
+      <p>O dossiê não atribui à comunidade Laklãnõ a responsabilidade pelo risco hídrico do Vale do Itajaí. <strong>A responsabilidade principal recai sobre o Estado</strong>, que construiu, operou e manteve uma estrutura estratégica sem resolver, de forma definitiva, as obrigações jurídicas, territoriais e administrativas decorrentes da sua implantação.</p>
+    </div>
+
+    <div class="grid2" style="margin-top:1.5rem;">
+      <div class="card" style="border-left-color:var(--navy3);">
+        <h4>Povos atingidos</h4>
+        <p>A Terra Indígena Ibirama-Laklãnõ envolve povos <strong>Xokleng/Laklãnõ</strong>, <strong>Kaingang</strong> e <strong>Guarani</strong>. Comunidades que vivem dentro ou no entorno de área diretamente impactada pela construção e operação da Barragem Norte.</p>
+      </div>
+      <div class="card red">
+        <h4>Protocolo de 1992 + Sentença de 2003</h4>
+        <p>O Protocolo de 1992 foi o primeiro marco formal de composição. A sentença de 2003 reconheceu obrigações concretas do Estado. Em 2025, o MPF articulou acordo para <em>início</em> do cumprimento — 22 anos depois.</p>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <p>A reparação indígena não beneficia apenas a comunidade atingida. Ela também protege toda a população a jusante, porque reduz conflitos, estabiliza o acesso técnico e permite que a barragem seja operada, mantida e fiscalizada sem bloqueios institucionais.</p>
+    </div>
+
+    <div class="callout callout-orange">
+      <span class="callout-icon">🔑</span>
+      <p><strong>Ponto central:</strong> A pergunta correta não é se a reparação indígena atrapalha a segurança da região. A pergunta é: por que o Estado demorou tanto para cumprir obrigações que, resolvidas no tempo adequado, poderiam ter garantido paz institucional, acesso técnico permanente e maior segurança para todos?</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 14. MATRIZ PROMESSA × PROVA ═══════════ -->
+<section id="promessa-prova">
+  <div class="container">
+    <span class="sec-label">Matriz Promessa × Prova</span>
+    <h2 class="sec-title">Promessa pública exige prova de execução. Não declaração de intenção.</h2>
+    <p class="body">Anúncio público não é prova de entrega. Quando o Estado divulga obra, acordo ou investimento, deve apresentar: processo licitatório, contrato assinado, empresa contratada, CNPJ, valor, ordem de serviço, ART, cronograma, medições, relatório fotográfico, testes operacionais e termo de recebimento.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Promessa / obrigação</th><th>Origem</th><th>Valor / referência</th><th>Contrato / empresa</th><th>Ordem de serviço</th><th>ART</th><th>Entrega comprovada</th><th>Situação</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td>Casas para famílias indígenas</td>
+            <td>Sentença 2003 / acordos 2025 / convênios municipais</td>
+            <td>Incluídas no pacote R$ 70 mi+; licitações municipais parcialmente localizadas</td>
+            <td class="td-partial">Parcialmente localizado</td>
+            <td class="td-partial">Parcialmente localizada</td>
+            <td class="td-critical">Não localizada</td>
+            <td class="td-critical">Sem termo final de recebimento</td>
+            <td class="td-partial">Em andamento, com comprovação final pendente</td>
+          </tr>
+          <tr>
+            <td>Canal extravasor da Barragem Norte</td>
+            <td>JICA / convênios federais 2019 / ACP 5012227</td>
+            <td>Convênio específico firmado; vigência encerrada ou expirada</td>
+            <td class="td-critical">Não localizado</td>
+            <td class="td-critical">Não localizada</td>
+            <td class="td-critical">Não localizada</td>
+            <td class="td-critical">Não comprovada</td>
+            <td class="td-critical">Crítico</td>
+          </tr>
+          <tr>
+            <td>Reforma da Barragem Norte</td>
+            <td>TCE/SC / acordos / anúncios do Estado</td>
+            <td>Valor previsto em convênios e novos anúncios</td>
+            <td class="td-partial">Parcial</td>
+            <td class="td-partial">Parcial</td>
+            <td class="td-critical">Não localizada</td>
+            <td class="td-critical">Sem comprovação pública suficiente</td>
+            <td class="td-critical">Crítico</td>
+          </tr>
+          <tr>
+            <td>Comportas da Barragem Sul</td>
+            <td>TCE/SC / modernização anunciada pelo Estado</td>
+            <td>Valor individual a confirmar</td>
+            <td class="td-partial">Parcial</td>
+            <td class="td-partial">Parcial</td>
+            <td class="td-critical">Não localizada</td>
+            <td class="td-partial">Indícios de execução, sem termo final</td>
+            <td class="td-alert">Alerta</td>
+          </tr>
+          <tr>
+            <td>Automação e operação remota</td>
+            <td>JICA / TCE/SC / SC Protegida e Resiliente</td>
+            <td>Incluída em anúncios do pacote R$ 900 milhões</td>
+            <td class="td-partial">Parcial</td>
+            <td class="td-partial">Parcial</td>
+            <td class="td-critical">Não verificada</td>
+            <td class="td-partial">Parcial, dependente de teste e recebimento</td>
+            <td class="td-alert">Alerta</td>
+          </tr>
+          <tr>
+            <td>Rede de monitoramento hidrometeorológico</td>
+            <td>TCE/SC / Defesa Civil / programas estaduais</td>
+            <td>Incluída em anúncios de investimento</td>
+            <td class="td-partial">Parcial</td>
+            <td class="td-partial">Parcial</td>
+            <td class="td-critical">Não verificada</td>
+            <td class="td-partial">Sem relatório consolidado de funcionamento</td>
+            <td class="td-alert">Alerta</td>
+          </tr>
+          <tr>
+            <td><strong>Total anunciado</strong></td>
+            <td>Acordos judiciais, programas estaduais e anúncios públicos</td>
+            <td>Mais de R$ 900 mi em Defesa Civil + R$ 70 mi+ no acordo indígena</td>
+            <td class="td-critical">Contratos não consolidados</td>
+            <td class="td-critical">Ordens de serviço não consolidadas</td>
+            <td class="td-critical">ARTs não localizadas</td>
+            <td class="td-critical">Execução integral não comprovada</td>
+            <td class="td-critical">Sem comprovação suficiente</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-red" style="margin-top:1rem;">
+      <span class="callout-icon">❗</span>
+      <p><strong>Onde está a prova?</strong> O Estado anunciou recursos, obras, acordos e modernizações. Mas anúncio não fecha comporta, não recupera barragem, não constrói estrada e não protege família nenhuma. Em segurança hídrica, a população não pode viver de manchete, nota oficial ou reunião de gabinete.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 15. CONTROLE EXTERNO ═══════════ -->
+<section>
+  <div class="container">
+    <span class="sec-label">Controle Externo · TCE/SC e Judiciário</span>
+    <h2 class="sec-title">Quando o risco chega ao Judiciário e ao controle externo</h2>
+    <p class="body">A judicialização e a atuação dos órgãos de controle demonstram que a situação das barragens deixou de ser apenas questão administrativa interna. O tema passou a envolver deveres públicos formalmente cobrados.</p>
+
+    <div class="grid2">
+      <div class="card" style="border-left-color:var(--navy3);">
+        <h4>ACP nº 5012227-71.2018.4.04.7205</h4>
+        <p>Ação Civil Pública relacionada à segurança, manutenção, recuperação e operação da Barragem Norte. Envolve a necessidade de acesso técnico, comprovação de segurança, cumprimento de obrigações operacionais e realização de perícia independente.</p>
+      </div>
+      <div class="card" style="border-left-color:var(--navy3);">
+        <h4>ACP nº 5013528-53.2018.4.04.7205</h4>
+        <p>Ação Civil Pública relacionada à reparação dos povos indígenas atingidos pela construção e operação da Barragem Norte. Possui relação direta com os acordos de 2025 e a normalização do acesso à barragem.</p>
+      </div>
+      <div class="card orange">
+        <h4>TCE/SC — Relatórios e Auditorias</h4>
+        <p>O TCE/SC realizou auditorias e monitoramentos sobre a Defesa Civil, as barragens, as comportas, os planos, os manuais e a capacidade de resposta do Estado. Os relatórios registram, com força institucional, falhas técnicas e cumprimento parcial.</p>
+      </div>
+      <div class="card" style="border-left-color:var(--navy3);">
+        <h4>MPF — Ministério Público Federal</h4>
+        <p>Atua no acompanhamento das obrigações relacionadas às comunidades indígenas e à Barragem Norte. Articulou o acordo de R$ 70 milhões em agosto de 2025 para início do cumprimento da sentença de 2003.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-navy" style="margin-top:1rem;">
+      <span class="callout-icon">🔍</span>
+      <p><strong>Proposta de perícia judicial independente:</strong> Em tema de risco coletivo, o Estado não deve ser o único avaliador de si mesmo. A destinação de astreintes para custear perícia técnica independente pode garantir avaliação imparcial, com metodologia pública, responsáveis identificados e conclusões verificáveis.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 16. PERGUNTAS AO ESTADO ═══════════ -->
+<section id="perguntas">
+  <div class="container">
+    <span class="sec-label">Perguntas ao Estado</span>
+    <h2 class="sec-title">O Vale do Itajaí não precisa de tranquilização verbal. Precisa de comprovação técnica.</h2>
+    <p class="body">Este dossiê não acusa. Exige resposta. Cada pergunta tem base em documento, laudo, auditoria ou processo judicial disponível na biblioteca. Podem embasar pedidos de acesso à informação (LAI), requerimentos parlamentares e manifestações ao MPF.</p>
+
+    <ol class="q-list">
+      <li>Qual é a condição atual de cada comporta das três barragens? Existe laudo de inspeção recente, com ART do responsável técnico, fotografias e data?</li>
+      <li>Quando foi a última inspeção in loco da Barragem Norte? Quem realizou, quem assinou e qual o resultado?</li>
+      <li>Existe PAE (Plano de Ação Emergencial) atualizado para cada barragem? Está publicado? Qual a data da última revisão?</li>
+      <li>Existe PSB (Plano de Segurança da Barragem) atualizado? Qual o prazo de validade e quem elaborou?</li>
+      <li>O canal extravasor da Barragem Norte tem projeto executivo aprovado? Existe licitação publicada, contrato assinado e cronograma?</li>
+      <li>Quem autorizou, custeou e executou a operação emergencial de 2023? Existe relatório técnico, nota de empenho e prestação de contas?</li>
+      <li>O contrato das casas previstas nos acordos foi assinado? Com qual empresa, por qual valor e em qual prazo?</li>
+      <li>As obras prometidas nos acordos de 2025 já começaram? Existe ordem de serviço emitida para cada item?</li>
+      <li>As recomendações da SEMAE foram integralmente cumpridas? Quais foram implementadas e quais permanecem pendentes?</li>
+      <li>O que o Estado ainda não localizou ou não produziu? Existe inventário de documentação faltante informado ao juízo?</li>
+      <li>Quem responde por cada atraso? Existe identificação nominal do responsável administrativo por cada obrigação vencida?</li>
+      <li>Existe matriz integrada de operação das três barragens? Quem coordena a decisão de abertura e fechamento em tempo real durante eventos de chuva?</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════ 17. BIBLIOTECA INVERSA ═══════════ -->
+<section id="biblioteca-inversa">
+  <div class="container">
+    <span class="sec-label">Biblioteca Inversa</span>
+    <h2 class="sec-title">Documentos públicos ainda não localizados</h2>
+    <p class="body">Registro dos documentos que deveriam existir por exigência legal, técnica, administrativa ou judicial, mas que ainda não foram localizados publicamente. Oriente pedidos de acesso à informação (LAI) com esta lista.</p>
+
+    <h3 class="sub-title">Documentos técnicos essenciais</h3>
+    <ul class="bullet">
+      <li>PAE atualizado para cada uma das três barragens, com rotas de evacuação, zonas de risco, responsáveis e data da última revisão.</li>
+      <li>PSB vigente para cada estrutura, com responsável técnico, ART, diagnóstico atualizado e medidas de manutenção.</li>
+      <li>Laudo recente de inspeção das comportas da Barragem Norte, com data, ART, fotografias, resultado e medidas corretivas.</li>
+      <li>Laudos atualizados de segurança das Barragens Norte, Sul e Oeste, com análise estrutural, hidráulica e operacional.</li>
+      <li>Mapa de inundação atualizado, com mancha de inundação, áreas de risco e rotas de evacuação.</li>
+      <li>Plano de contingência estadual para eventos críticos envolvendo as barragens.</li>
+    </ul>
+
+    <h3 class="sub-title">Documentos sobre operação e emergência</h3>
+    <ul class="bullet">
+      <li>Relatório técnico da operação emergencial de 2023, indicando quem autorizou, quem executou, quais custos foram assumidos e quem custeou.</li>
+      <li>Atas das reuniões operacionais durante as cheias de 2023.</li>
+      <li>Matriz integrada de decisão para abertura e fechamento das comportas das três barragens.</li>
+      <li>Protocolo oficial de comunicação com os municípios, com quem avisa, por qual canal e com qual antecedência.</li>
+      <li>Comprovação de treinamentos, simulados ou exercícios práticos envolvendo Defesa Civil, municípios e operadores.</li>
+    </ul>
+
+    <h3 class="sub-title">Documentos sobre obras, contratos e execução</h3>
+    <ul class="bullet">
+      <li>Contratos das obras anunciadas nos acordos de 2025 e 2026, com empresa contratada, CNPJ, valor e objeto.</li>
+      <li>Ordens de serviço das obras prometidas, com data de emissão e início efetivo da execução.</li>
+      <li>Cronogramas físico-financeiros das obras, com etapas, valores e prazos de execução.</li>
+      <li>ARTs dos responsáveis técnicos pelas obras, inspeções, projetos, laudos, testes e recebimentos.</li>
+      <li>Termos de recebimento provisório ou definitivo das obras realizadas nas Barragens Sul e Oeste.</li>
+      <li>Relatórios de teste das comportas, automação, operação remota, geradores e sistemas de alerta.</li>
+    </ul>
+
+    <h3 class="sub-title">Documentos específicos da Barragem Norte</h3>
+    <ul class="bullet">
+      <li>Projeto executivo atualizado do canal extravasor da Barragem Norte.</li>
+      <li>Licitação, contrato, ordem de serviço e termo de recebimento referentes ao canal extravasor.</li>
+      <li>Documentos de execução dos convênios federais de 2019 ligados à reforma e ao canal extravasor.</li>
+      <li>Prestação de contas final dos convênios encerrados, com valores repassados, executados e justificativa para eventual não execução integral.</li>
+    </ul>
+
+    <div class="callout callout-navy" style="margin-top:1rem;">
+      <span class="callout-icon">ℹ️</span>
+      <p>A ausência desses documentos não prova, por si só, irregularidade. Mas impede que a população verifique se as obrigações foram cumpridas, se as obras foram executadas, se as barragens estão seguras e se o sistema está preparado para emergências. <strong>Em segurança hídrica, transparência não é favor administrativo. É condição mínima de confiança pública.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 18. BIBLIOTECA PÚBLICA ═══════════ -->
+<section id="biblioteca">
+  <div class="container">
+    <span class="sec-label">Biblioteca Pública</span>
+    <h2 class="sec-title">Documentos de referência do dossiê</h2>
+    <p class="body">Cada seção deste dossiê está referenciada em documentos públicos identificados abaixo.</p>
+
+    <h3 class="sub-title">Judiciário — TRF-4</h3>
+    <div class="lib-card">
+      <div class="lib-card-info">
+        <h4>ACP nº 5012227 — Segurança das Barragens (Partes 1–21)</h4>
+        <p>TRF da 4ª Região · 2018–2026 · Ação Civil Pública sobre segurança operacional das barragens Norte, Sul e Oeste. Inclui intimações, astreintes e pedido de perícia independente.</p>
+        <span class="lib-tag lib-tag-jud">Judiciário</span><span class="badge badge-fact" style="font-size:0.6rem;">Alta força probatória</span>
+      </div>
+    </div>
+    <div class="lib-card">
+      <div class="lib-card-info">
+        <h4>ACP nº 5013528 — Reparação Indígenas (Partes 1–15)</h4>
+        <p>TRF da 4ª Região · 2018–2026 · Ação Civil Pública sobre reparação dos povos indígenas afetados pela Barragem Norte. Sentença de 2003 e acordos de 2025.</p>
+        <span class="lib-tag lib-tag-jud">Judiciário</span><span class="lib-tag lib-tag-ind">Indígenas</span><span class="badge badge-fact" style="font-size:0.6rem;">Alta força probatória</span>
+      </div>
+    </div>
+
+    <h3 class="sub-title">TCE/SC — Controle Externo</h3>
+    <div class="lib-card">
+      <div class="lib-card-info">
+        <h4>TCE/SC — Relatório de Auditoria Defesa Civil (2023)</h4>
+        <p>Auditoria sobre a Defesa Civil estadual e o sistema de barragens. Identifica deficiências na gestão e no controle operacional.</p>
+        <span class="lib-tag lib-tag-tce">TCE/SC</span><span class="badge badge-fact" style="font-size:0.6rem;">Alta força probatória</span>
+      </div>
+    </div>
+    <div class="lib-card">
+      <div class="lib-card-info">
+        <h4>TCE/SC — Comportas Barragem (2023)</h4>
+        <p>Análise específica sobre o estado das comportas das barragens. Documento central para avaliar a segurança operacional.</p>
+        <span class="lib-tag lib-tag-tce">TCE/SC</span><span class="badge badge-fact" style="font-size:0.6rem;">Alta força probatória</span>
+      </div>
+    </div>
+    <div class="lib-card">
+      <div class="lib-card-info">
+        <h4>TCE/SC — 2PMO Defesa Civil (Mar/2026)</h4>
+        <p>Segunda rodada do PMO. Avaliação atualizada da Defesa Civil. Documento mais recente disponível.</p>
+        <span class="lib-tag lib-tag-tce">TCE/SC</span><span class="badge badge-fact" style="font-size:0.6rem;">Alta força probatória</span>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Estudos Técnicos</h3>
+    <div class="lib-card">
+      <div class="lib-card-info">
+        <h4>JICA — Itajaí Flood Control Project (2011)</h4>
+        <p>Estudo completo de controle de cheias para a Bacia do Itajaí elaborado pela agência japonesa. Propostas técnicas que ainda não foram integralmente implementadas.</p>
+        <span class="lib-tag lib-tag-tec">Técnico</span><span class="badge badge-fact" style="font-size:0.6rem;">Alta força probatória</span>
+      </div>
+    </div>
+    <div class="lib-card">
+      <div class="lib-card-info">
+        <h4>ABRHidro — Simulação de Ruptura END181 (2022)</h4>
+        <p>Simulação técnica do cenário de ruptura da Barragem Norte. Quantifica o impacto sobre municípios a jusante. Documento técnico de referência nacional.</p>
+        <span class="lib-tag lib-tag-tec">Técnico</span><span class="badge badge-fact" style="font-size:0.6rem;">Alta força probatória</span>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Legislação</h3>
+    <div class="lib-card">
+      <div class="lib-card-info">
+        <h4>Manual de Operação das Barragens 2024</h4>
+        <p>Manual oficial de operação das barragens do Vale do Itajaí. Publicado após consulta pública de 2024. Referência para avaliação dos procedimentos adotados.</p>
+        <span class="lib-tag lib-tag-leg">Legislação / Normativo</span><span class="badge badge-fact" style="font-size:0.6rem;">Alta força probatória</span>
+      </div>
+    </div>
+    <div class="lib-card">
+      <div class="lib-card-info">
+        <h4>Lei nº 12.334/2010 — Política Nacional de Segurança de Barragens</h4>
+        <p>Marco legal fundamental. Exige PSB, CRI, DPA, PAE, inspeções regulares, revisão periódica e responsável técnico com ART.</p>
+        <span class="lib-tag lib-tag-leg">Legislação</span><span class="badge badge-fact" style="font-size:0.6rem;">Alta força probatória</span>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Acordos e Terra Indígena</h3>
+    <div class="lib-card">
+      <div class="lib-card-info">
+        <h4>Ata do Acordo — Terra Indígena Ibirama-Laklãnõ (2025)</h4>
+        <p>Ata formal dos acordos firmados entre o Estado e os povos indígenas. Contém as obrigações assumidas, valores e cronograma.</p>
+        <span class="lib-tag lib-tag-ind">Indígenas</span><span class="badge badge-fact" style="font-size:0.6rem;">Alta força probatória</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 19. PARTICIPAÇÃO ═══════════ -->
+<section id="participacao">
+  <div class="container">
+    <span class="sec-label">Participação Pública</span>
+    <h2 class="sec-title">Você tem documento, foto, vídeo ou informação? Envie para análise.</h2>
+    <p class="body">Toda informação recebida será analisada de forma independente. O envio não implica publicação automática. O dossiê aceita correções, respostas oficiais, novos documentos e substituição de versões desatualizadas — sempre com registro público da data, origem e justificativa.</p>
+
+    <div class="form-section">
+      <h3>Formulário de participação cidadã</h3>
+      <p>Seus dados serão usados exclusivamente para contato sobre este dossiê. Não serão vendidos, compartilhados para fins comerciais ou utilizados para finalidade eleitoral.</p>
+      <div class="form-grid">
+        <div class="form-field"><label>Nome *</label><input type="text" placeholder="Seu nome completo"></div>
+        <div class="form-field"><label>Cidade *</label><input type="text" placeholder="Cidade / município"></div>
+        <div class="form-field"><label>Contato (e-mail ou telefone) *</label><input type="text" placeholder="E-mail ou WhatsApp"></div>
+        <div class="form-field">
+          <label>Tipo de material</label>
+          <select>
+            <option>Selecione...</option>
+            <option>Documento oficial</option>
+            <option>Fotografia</option>
+            <option>Vídeo</option>
+            <option>Testemunho</option>
+            <option>Informação técnica</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="form-field full"><label>Descrição do material / informação</label><textarea rows="3" placeholder="Descreva brevemente o que você tem e como pode contribuir com o dossiê..."></textarea></div>
+      </div>
+      <button class="btn-submit">Enviar informação para análise</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="container">
+    <h3>VALE SOB ALERTA</h3>
+    <p>Plataforma pública de análise documental independente sobre a segurança hídrica no Vale do Itajaí, SC.</p>
+    <p>Última atualização: <strong>Maio/2026</strong></p>
+
+    <div class="footer-quote">
+      "O Vale do Itajaí não precisa de tranquilização verbal. Precisa de comprovação técnica, transparência documental e operação segura."
+      <div style="margin-top:0.5rem; font-size:0.8rem; color:#8AADCA;">— Tese central do dossiê · Dr. Claudio Camargo — OAB/SC 64.520</div>
+    </div>
+
+    <p><strong>Carlos Wagner — Alemão da Alumetal</strong> · Curadoria pública e coordenação editorial</p>
+    <p><strong>Dr. Claudio Camargo — OAB/SC 64.520</strong> · Autoria técnica e jurídica</p>
+    <p style="margin-top:1.5rem; font-size:0.78rem; color:#5A7A99; max-width:720px; margin-left:auto; margin-right:auto;">
+      O presente material representa análise independente de documentos públicos e informações disponíveis, não constituindo documento governamental, laudo oficial ou manifestação institucional. As afirmações estão referenciadas em documentos identificados. Qualquer órgão público, entidade, empresa ou pessoa mencionada poderá encaminhar documentos, esclarecimentos ou pedido de correção.
+    </p>
+    <p style="margin-top:1.5rem; font-size:0.78rem; color:#5A7A99;">
+      Vale Sob Alerta · Dossiê técnico-jurídico independente · Vale do Itajaí, SC · 2026
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
